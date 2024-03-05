@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema Movil</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:insert="~{component/natBar::header}"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Sistema <small>Movil</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/ubicacion/show}">Ver ubicaciones</a></li>
+        <li class="breadcrumb-item active">Registrar ubicación</li>
+    </ol>
+    <h2>Agregar ubicación</h2>
+    <br>
+    <form class="form-horizontal" th:action="@{/ubicacion/save}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ubicacion_nombre">Ubicación:</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="ubicacion_nombre" name="ubicacion_nombre"
+                          placeholder="Ingrese la ubicación" required
+                          autocomplete="off"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div>
+                <button type="submit" class="btn btn-success" id="saveButton">
+                    <span class="glyphicon glyphicon-saved">Guardar</span>
+                </button>
+                <a th:href="@{/ubicacion/show}" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-saved">Cancelar</span>
+                </a>
+            </div>
+        </div>
+    </form>
+    <br>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:insert="~{component/footer::footer}"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('saveButton').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const form = document.querySelector('form');
+
+        if (!form.checkValidity()) {
+            // El formulario no es válido, por lo que mostramos los mensajes de error
+            form.reportValidity();
+        } else {
+            // El formulario es válido, por lo que mostramos el SweetAlert2 y enviamos el formulario
+            Swal.fire({
+                title: 'Guardando...',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEnterKey: false,
+                allowEscapeKey: false,
+                showLoading: true,
+            });
+
+            form.submit();
+        }
+    });
+</script>
+
+</body>
+
+</html>

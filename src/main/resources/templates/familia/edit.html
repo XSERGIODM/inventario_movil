@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema Movil</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:insert="~{component/natBar::header}"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Sistema <small>Movil</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/familia/show}">Ver familias</a></li>
+        <li class="breadcrumb-item active">Actualizar familia</li>
+    </ol>
+    <h2>Actualizar familia</h2>
+    <br>
+    <form class="form-horizontal" th:action="@{/familia/update}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="familia_id" th:value="${familia.getFamilia_id()}">
+        <input type="hidden" name="familia_estado" th:value="${familia.getFamilia_estado()}">
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="marca_id">Marca:</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="marca_id" name="marca_id" required>
+                    <option value="" selected>Seleccione una marca</option>
+                    <option th:each="marca : ${marcas}" th:value="${marca.getMarca_id()}"
+                            th:text="${marca.getMarca_nombre()}" th:selected="${familia.getFamilia_marca().getMarca_id() == marca.getMarca_id()}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="familia_nombre">Nombre:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="familia_nombre" name="familia_nombre"
+                       placeholder="Ingrese el nombre de la familia" autocomplete="off" required
+                       th:value="${familia.getFamilia_nombre()}">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div>
+                <button type="submit" class="btn btn-success" id="saveButton">
+                    <span class="glyphicon glyphicon-saved">Actualizar</span>
+                </button>
+                <a th:href="@{/familia/show}" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-saved">Cancelar</span>
+                </a>
+            </div>
+        </div>
+    </form>
+    <br>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:insert="~{component/footer::footer}"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('saveButton').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const form = document.querySelector('form');
+
+        if (!form.checkValidity()) {
+            // El formulario no es válido, por lo que mostramos los mensajes de error
+            form.reportValidity();
+        } else {
+            // El formulario es válido, por lo que mostramos el SweetAlert2 y enviamos el formulario
+            Swal.fire({
+                title: 'Actualizando...',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEnterKey: false,
+                allowEscapeKey: false,
+                showLoading: true,
+            });
+
+            form.submit();
+        }
+    });
+</script>
+</body>
+
+</html>

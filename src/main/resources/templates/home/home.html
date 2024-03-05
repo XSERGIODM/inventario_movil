@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema Vitix</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<!--<div th:insert="~{user/template_user.html::header}" th:if="${sessionModel==null}"></div>
+<div th:insert="~{user/template_user.html::header-user}" th:unless="${sessionModel==null}"></div>-->
+<div th:insert="~{component/natBar::header}"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Bienvenido a Virtix company</h1>
+        <p class="lead">Tu tienda de productos en Línea</p>
+    </header>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/movil/show}">Moviles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/modelo/show}">Modelos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " th:href="@{/familia/show}">Familias</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/marca/show}">Marcas</a>
+        </li>
+    </ul>
+    <br>
+    <!-- Page Features -->
+    <div class="row ">
+        <div class="col-lg-3 col-md-6 mb-4" th:each="movil : ${moviles}">
+            <div class="card h-100">
+                <img class="card-img-top" th:src="@{/images/{img} (img = ${movil.getMovil_imagen()})}" alt="">
+                <div class="card-body">
+                    <p class="card-text text-center"><strong th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_nombre()} + ' ' + ${movil.getMovil_modelo().getModelo_nombre()}"></strong></p>
+                    <p class="card-text"
+                       th:text="'Precio: $'+${#numbers.formatDecimal(movil.getMovil_precio_publico(), 1, 'POINT', 2, 'COMMA')}"></p>
+                    <p class="card-text" th:text="'Gigas: ' + ${movil.getMovil_gigas()}"></p>
+                    <p class="card-text" th:text="'Bateria: %' + ${movil.getMovil_bateria()}"></p>
+                    <p class="card-text" th:text="'Color: ' + ${movil.getMovil_color().getColor_nombre()}"></p>
+                    <p class="card-text" th:text="'Calidad: ' + ${movil.getMovil_calidad()} + '/10'"></p>
+                    <p class="card-text" th:text="'Detalles: ' + ${movil.getMovil_observaciones()}"></p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-success">
+                        Ver movil
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:insert="~{component/footer::footer}"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

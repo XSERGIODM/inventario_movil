@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema Movil</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:insert="~{component/natBar::header}"></div>
+
+<!-- Page Content -->
+<div class="col-lg-auto">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Sistema <small>Movil</small>
+    </h1>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/movil/show}">Moviles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/modelo/show}">Modelos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/familia/show}">Familias</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/marca/show}">Marcas</a>
+        </li>
+    </ul>
+    <br>
+    <h2>Marcas registradas</h2>
+    <br>
+    <a class="btn btn-primary" th:href="@{/marca/create}">Agregar marca</a>
+    <table class="table cell-border">
+        <thead class="table-dark text-center">
+        <tr>
+            <th scope="col">Marca</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody class="table-hover">
+        <tr th:classappend="${marca.getMarca_estado() ? 'table-light' : 'table-danger'}" th:each="marca:${marcas}">
+            <td th:text="${marca.getMarca_nombre()}"></td>
+            <td th:text="${marca.getMarca_estado()?'Activa':'Inactiva'}"></td>
+            <td class="text-center">
+                <a class="btn btn-info" th:href="@{/marca/edit/{id} (id=${marca.getMarca_id()})}">Editar</a>
+                <a class="btn" th:classappend="${marca.getMarca_estado() ? 'btn-danger' : 'btn-success'}" th:href="@{/marca/deshabilitarHabilitar/{id} (id=${marca.getMarca_id()})}" th:text="${marca.getMarca_estado()?'Deshabilitar':'Habilitar'}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:insert="~{component/footer::footer}"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            },
+            "columnDefs": [
+                {"orderable": false, "targets": 2},
+                {"searchable": false, "targets": 2}
+            ]
+        });
+    });
+</script>
+</body>
+
+</html>

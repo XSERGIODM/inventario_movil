@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema Movil</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:insert="~{component/natBar::header}"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Sistema <small>Movil</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/movil/show}">Ver moviles</a></li>
+        <li class="breadcrumb-item active">Actualizar Movil</li>
+    </ol>
+    <h2>Actualizar celular</h2>
+    <br>
+    <form class="form-horizontal" th:action="@{/movil/update}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="movil_id" th:value="${movil.getMovil_id()}">
+        <input type="hidden" name="movil_estado" th:value="${movil.getMovil_estado()}">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="marca_id">Marca:</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="marca_id" name="marca_id" required onchange="updateFamilias()">
+                    <option value="">Seleccione una marca</option>
+                    <option th:each="marca : ${marcas}" th:value="${marca.getMarca_id()}"
+                            th:text="${marca.getMarca_nombre()}"
+                            th:selected="${marca.getMarca_id() == movil.getMovil_modelo().getModelo_familia().getFamilia_marca().getMarca_id()}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="familia_id">Familia:</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="familia_id" name="familia_id" required onchange="updateModelos()">
+                    <option th:value="${movil.getMovil_modelo().getModelo_familia().getFamilia_id()}" selected th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_nombre()}"></option>
+                    <!-- Las opciones serán pobladas por JavaScript -->
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="modelo_id">Modelo:</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="modelo_id" name="modelo_id" required>
+                    <option th:value="${movil.getMovil_modelo().getModelo_id()}" selected th:text="${movil.getMovil_modelo().getModelo_nombre()}"></option>
+                    <!-- Las opciones serán pobladas por JavaScript -->
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_imei1">IMEI 1:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="movil_imei1" name="movil_imei1"
+                       placeholder="Ingrese el IME 1 del dispositivo" autocomplete="off" required
+                       th:value="${movil.getMovil_imei1()}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_imei2">IMEI 2:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="movil_imei2" name="movil_imei2"
+                       placeholder="Ingrese el IME 2 del dispositivo" autocomplete="off" required
+                       th:value="${movil.getMovil_imei2()}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_bateria">Bateria:</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="movil_bateria" name="movil_bateria"
+                       placeholder="Ingrese el % de bateria del dispositivo" autocomplete="off" required max="100"
+                       min="0" th:value="${movil.getMovil_bateria()}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_gigas">Gigas:</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="movil_gigas" name="movil_gigas"
+                       placeholder="Ingrese la cantidad de gigas del dispositivo" autocomplete="off" required
+                       th:value="${movil.getMovil_gigas()}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_color">Color:</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="movil_color" name="movil_color" required>
+                    <option value="" selected>Seleccione un color</option>
+                    <option th:each="color : ${colores}" th:value="${color.getColor_id()}"
+                            th:text="${color.getColor_nombre()}"
+                            th:selected="${color.getColor_id() == movil.getMovil_color().getColor_id()}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_calidad">Calidad:</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="movil_calidad" name="movil_calidad"
+                       placeholder="Ingrese la calidad del dispositivo" autocomplete="off" required max="10" min="1"
+                       th:value="${movil.getMovil_calidad()}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_precio_publico">Precio público:</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="movil_precio_publico" name="movil_precio_publico"
+                       placeholder="Ingrese el precio publico del dispositivo" autocomplete="off" required
+                       th:value="${movil.getMovil_precio_publico()}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="movil_observaciones">Observación:</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="movil_observaciones" name="movil_observaciones"
+                          placeholder="Ingrese las observaciones del dispositivo" required
+                          autocomplete="off" th:text="${movil.getMovil_observaciones()}"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="img">Imagen:</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control-file" id="img" name="img">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div>
+                <button type="submit" class="btn btn-success" id="saveButton">
+                    <span class="glyphicon glyphicon-saved">Actualizar</span>
+                </button>
+                <a th:href="@{/movil/show}" class="btn btn-warning">
+                <span class="glyphicon glyphicon-saved">Cancelar</span>
+                </a>
+            </div>
+        </div>
+    </form>
+    <br>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:insert="~{component/footer::footer}"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function updateFamilias() {
+        const marcaId = document.getElementById('marca_id').value;
+        const familiaDropdown = document.getElementById('familia_id');
+        // Si marcaId es vacío, limpia las opciones y retorna
+        if (marcaId === "") {
+            while (familiaDropdown.firstChild) {
+                familiaDropdown.removeChild(familiaDropdown.firstChild);
+            }
+            const option1 = document.createElement('option');
+            option1.value = "";
+            option1.text = "Seleccione una familia";
+            option1.selected = true;
+            familiaDropdown.add(option1);
+            updateModelos();
+            return;
+        }
+        console.log('Marca ID: ', marcaId); // Verifica el id de la marca
+        $.ajax({
+            url: '/movil/getFamiliasByMarca/' + marcaId,
+            type: 'GET',
+            success: function (data) {
+                console.log('Data: ', data); // Verifica la respuesta del servidor
+                // Limpia el dropdown antes de agregar nuevas opciones
+                while (familiaDropdown.firstChild) {
+                    familiaDropdown.removeChild(familiaDropdown.firstChild);
+                }
+                const option1 = document.createElement('option');
+                option1.value = "";
+                option1.text = "Seleccione una familia";
+                option1.selected = true;
+                familiaDropdown.add(option1);
+                data.forEach(function (familia) {
+                    const option = document.createElement('option');
+                    option.value = familia.familia_id;
+                    option.text = familia.familia_nombre;
+                    familiaDropdown.add(option);
+                });
+            },
+            error: function (error) {
+                console.log('Error: ', error); // Verifica si hay algún error
+            }
+        });
+    }
+
+    function updateModelos() {
+        const marcaId = document.getElementById('marca_id').value;
+        const familiaId = document.getElementById('familia_id').value;
+        const modeloDropdown = document.getElementById('modelo_id');
+        // Si familiaId es vacío, limpia las opciones y retorna
+        if (familiaId === "" || marcaId === "") {
+            while (modeloDropdown.firstChild) {
+                modeloDropdown.removeChild(modeloDropdown.firstChild);
+            }
+            const option1 = document.createElement('option');
+            option1.value = "";
+            option1.text = "Seleccione un modelo";
+            option1.selected = true;
+            modeloDropdown.add(option1);
+            return;
+        }
+        $.ajax({
+            url: '/movil/getModelosByFamilia/' + familiaId,
+            type: 'GET',
+            success: function (data) {
+                // Limpia el dropdown antes de agregar nuevas opciones
+                while (modeloDropdown.firstChild) {
+                    modeloDropdown.removeChild(modeloDropdown.firstChild);
+                }
+                const option1 = document.createElement('option');
+                option1.value = "";
+                option1.text = "Seleccione un modelo";
+                option1.selected = true;
+                modeloDropdown.add(option1);
+                data.forEach(function (modelo) {
+                    const option = document.createElement('option');
+                    option.value = modelo.modelo_id;
+                    option.text = modelo.modelo_nombre;
+                    modeloDropdown.add(option);
+                });
+            },
+            error: function (error) {
+                console.log('Error: ', error); // Verifica si hay algún error
+            }
+        });
+    }
+</script>
+<script>
+    document.getElementById('saveButton').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const form = document.querySelector('form');
+
+        if (!form.checkValidity()) {
+            // El formulario no es válido, por lo que mostramos los mensajes de error
+            form.reportValidity();
+        } else {
+            // El formulario es válido, por lo que mostramos el SweetAlert2 y enviamos el formulario
+            Swal.fire({
+                title: 'Actualizando...',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEnterKey: false,
+                allowEscapeKey: false,
+                showLoading: true,
+            });
+
+            form.submit();
+        }
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema Movil</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:insert="~{component/natBar::header}"></div>
+
+<!-- Page Content -->
+<div class="col-lg-auto">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Sistema <small>Movil</small>
+    </h1>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/movil/show}">Moviles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/modelo/show}">Modelos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " th:href="@{/familia/show}">Familias</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/marca/show}">Marcas</a>
+        </li>
+    </ul>
+    <br>
+    <h2>Productos</h2>
+    <br>
+    <a class="btn btn-primary" th:href="@{/movil/create}">Agregar celular</a>
+    <table class="table cell-border">
+        <thead class="table-dark text-center">
+        <tr>
+            <th scope="col">Marca</th>
+            <th scope="col">Familia</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">IMEI 1</th>
+            <th scope="col">Color</th>
+            <th scope="col">Gigas</th>
+            <th scope="col">%Bateria</th>
+            <th scope="col">Precio publico</th>
+            <th scope="col">Calidad</th>
+            <th scope="col">Observaciones</th>
+            <th scope="col">Ubicación actual</th>
+            <th scope="col">Disponible</th>
+            <th scope="col">Acción</th>
+        </tr>
+        </thead>
+        <tbody class="table-hover">
+        <tr th:classappend="${movil.getMovil_estado() ? 'table-light' : 'table-danger'}" th:each="movil:${moviles}">
+            <td th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_marca().getMarca_nombre()}"></td>
+            <td th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_nombre()}"></td>
+            <td th:text="${movil.getMovil_modelo().getModelo_nombre()}"></td>
+            <td th:text="${movil.getMovil_imei1()}"></td>
+            <td th:text="${movil.getMovil_color().getColor_nombre()}"></td>
+            <td th:text="${movil.getMovil_gigas()}"></td>
+            <td th:text="${movil.getMovil_bateria()}"></td>
+            <td th:text="'$'+${#numbers.formatDecimal(movil.getMovil_precio_publico(), 1, 'POINT', 0, 'COMMA')}"></td>
+            <td th:text="${movil.getMovil_calidad()}+'/10'"></td>
+            <td th:text="${movil.getMovil_observaciones()}"></td>
+            <td th:each="contexto : ${movil.getContextos()}" th:if="${contexto.getContexto_estado()}"
+                th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></td>
+            <td th:text="${movil.getMovil_estado()?'Si':'No'}"></td>
+            <td>
+                <a class="btn btn-info" th:href="@{/movil/info/{id} (id=${movil.getMovil_id()})}">Info</a>
+                <a class="btn btn-light" th:href="@{/movil/edit/{id} (id=${movil.getMovil_id()})}">Editar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:insert="~{component/footer::footer}"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            },
+            "columnDefs": [
+                {"orderable": false, "targets": 12},
+                {"searchable": false, "targets": 12}
+            ]
+        });
+    });
+</script>
+</body>
+
+</html>

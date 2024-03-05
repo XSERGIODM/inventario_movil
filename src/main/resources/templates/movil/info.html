@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema Movil</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:insert="~{component/natBar::header}"></div>
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Sistema <small>Movil</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/movil/show}">Ver moviles</a></li>
+        <li class="breadcrumb-item active">Información del Movil</li>
+    </ol>
+
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img class="img-thumbnail rounded"
+                         th:src="@{/images/{img} (img = ${movil.getMovil_imagen()})}" alt="holi">
+                </div>
+                <div class="col-lg-6">
+                    <input type="hidden" th:value="${movil.getMovil_id()}" name="id">
+                    <h2 class="card-title"
+                        th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_nombre()} + ' ' + ${movil.getMovil_modelo().getModelo_nombre()}"></h2>
+                    <h5 th:text="'Precio minimo: $'+${#numbers.formatDecimal(movil.getMovil_precio_publico(), 1, 'POINT', 0, 'COMMA')}"></h5>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <p><strong>IMEI 1:</strong> <span th:text="${movil.getMovil_imei1()}"></span>
+                                    </p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><strong>Gigas:</strong> <span th:text="${movil.getMovil_gigas()}"></span></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><strong>% de bateria:</strong> <span
+                                            th:text="${movil.getMovil_bateria()}"></span></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><strong>Calidad:</strong> <span th:text="${movil.getMovil_calidad()}"></span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <p><strong>IMEI 2:</strong> <span th:text="${movil.getMovil_imei2()}"></span>
+                                    </p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><strong>Color:</strong> <span
+                                            th:text="${movil.getMovil_color().getColor_nombre()}"></span></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><strong>Marca:</strong> <span
+                                            th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_marca().getMarca_nombre()}"></span>
+                                    </p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p th:each="contexto : ${movil.getContextos()}"
+                                       th:if="${contexto.getContexto_estado()}"><strong>Ubicación actual:</strong> <span
+                                            th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <p><strong>Descripción:</strong> <span
+                                    th:text="${movil.getMovil_observaciones()}"></span></p>
+                        </li>
+                    </ul>
+                    <br>
+                    <!--<h5>
+                        Precio venta:
+                        <label for="precio"></label>
+                        <input type="number" id="precio" name="precio" autocomplete="off"
+                               th:min="${movil.getMovil_precio_publico()}"
+                               th:value="${movil.getMovil_precio_publico()}">
+                    </h5>
+                    <br>-->
+                    <a type="button" class="btn btn-warning" th:href="@{/movil/show}">Atrás</a>
+                    <!--quiero hacer un modal que el boton que la activa se llame historial de ubicaciones-->
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                        Historial de ubicaciones
+                    </button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Historial de ubicaciones</h1>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p style="font-size: 20px;"
+                                       th:each="contexto : ${movil.getContextos()}"
+                                       th:if="${contexto.getContexto_estado()}">
+                                        La ubicación actual es <strong
+                                            th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></strong>
+                                        se entregó en esta fecha <strong
+                                            th:text="${#temporals.format(contexto.contexto_fecha_entrada, 'dd/MM/yyyy HH:mm:ss')}"></strong>
+                                        por el motivo de <strong th:text="${contexto.getContexto_detalle()}"></strong>
+                                    </p>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive mx-auto">
+                                        <table class="table cell-border" style="width: 100%;">
+                                            <thead class="table-dark text-center">
+                                            <tr>
+                                                <th scope="col">Ubicaciones anteriores</th>
+                                                <th scope="col">Fecha de entrada</th>
+                                                <th scope="col">Contexto de entrada</th>
+                                                <th scope="col">Fecha de salida</th>
+                                                <th scope="col">Contexto de salida</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="table-hover">
+                                            <tr th:each="contexto : ${movil.getContextos()}"
+                                                th:unless="${contexto.getContexto_estado()}">
+                                                <td th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></td>
+                                                <td th:text="${#temporals.format(contexto.contexto_fecha_entrada, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                <td th:text="${contexto.getContexto_detalle()}"></td>
+                                                <td th:text="${#temporals.format(contexto.contexto_fecha_salida, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                <td th:text="${contexto.getContexto_detalle_salida()}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                Nueva ubicación del movil
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="exampleModal2" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel2"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Nueva ubicación</h1>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" th:action="@{/contexto/save}" method="post"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="contexto_id"
+                                               th:value="${contextoActual.getContexto_id()}">
+                                        <input type="hidden" name="contexto_movil"
+                                               th:value="${contextoActual.getContexto_movil().getMovil_id()}">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2"
+                                                   for="contexto_detalle_salida">Salida actual:</label>
+                                            <div class="col-sm-10">
+                <textarea class="form-control" id="contexto_detalle_salida" name="contexto_detalle_salida"
+                          placeholder="Ingrese los detalles de la salida del dispositivo" required
+                          autocomplete="off"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="contexto_ubicacion">Nueva
+                                                ubicación: </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" id="contexto_ubicacion"
+                                                        name="contexto_ubicacion" required>
+                                                    <option value="">Seleccione la ubicación nueva</option>
+                                                    <option th:each="ubicacion: ${ubicaciones}"
+                                                            th:value="${ubicacion.getUbicacion_id()}"
+                                                            th:text="${ubicacion.getUbicacion_nombre()}">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2"
+                                                       for="contexto_detalle">Nueva entrada: </label>
+                                                <div class="col-sm-10">
+                <textarea class="form-control" id="contexto_detalle" name="contexto_detalle"
+                          placeholder="Ingrese los detalles de la nueva entrada del dispositivo" required
+                          autocomplete="off"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success" id="saveButton">Guardar</button>
+                                            <button type="reset" class="btn btn-secondary" data-dismiss="modal"
+                                                    aria-label="Close" data-target="#exampleModal">
+                                                Atrás
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:insert="~{component/footer::footer}"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('saveButton').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const form = document.querySelector('form');
+
+        if (!form.checkValidity()) {
+            // El formulario no es válido, por lo que mostramos los mensajes de error
+            form.reportValidity();
+        } else {
+            // El formulario es válido, por lo que mostramos el SweetAlert2 y enviamos el formulario
+            Swal.fire({
+                title: 'Actualizando...',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEnterKey: false,
+                allowEscapeKey: false,
+                showLoading: true,
+            });
+
+            form.submit();
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            },
+            "columnDefs": [
+                {"orderable": false, "targets": 2},
+                {"searchable": false, "targets": 2}
+            ]
+        });
+    });
+</script>
+</body>
+
+</html>
