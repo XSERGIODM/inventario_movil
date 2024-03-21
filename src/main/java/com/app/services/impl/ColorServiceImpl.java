@@ -19,8 +19,8 @@ public class ColorServiceImpl implements ColorService {
 
     @Override
     public Color save(Color color) {
-        color.setColor_id(null);
-        color.setColor_estado(true);
+        color.setColorId(null);
+        color.setColorEstado(true);
         return colorRepository.save(color);
     }
 
@@ -36,7 +36,7 @@ public class ColorServiceImpl implements ColorService {
 
     @Override
     public Color update(Color color) {
-        if (color.getColor_id() == null) {
+        if (color.getColorId() == null) {
             throw new RuntimeException("El id del color no puede ser nulo");
         }
         return colorRepository.save(color);
@@ -53,7 +53,7 @@ public class ColorServiceImpl implements ColorService {
         if (color == null) {
             throw new RuntimeException("El color no existe");
         }
-        color.setColor_estado(!color.getColor_estado());
+        color.setColorEstado(!color.getColorEstado());
         colorRepository.save(color);
     }
 }

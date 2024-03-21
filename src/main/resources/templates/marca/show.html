@@ -62,12 +62,12 @@
         </tr>
         </thead>
         <tbody class="table-hover">
-        <tr th:classappend="${marca.getMarca_estado() ? 'table-light' : 'table-danger'}" th:each="marca:${marcas}">
-            <td th:text="${marca.getMarca_nombre()}"></td>
-            <td th:text="${marca.getMarca_estado()?'Activa':'Inactiva'}"></td>
+        <tr th:classappend="${marca.getMarcaEstado() ? 'table-light' : 'table-danger'}" th:each="marca:${marcas}">
+            <td th:text="${marca.getMarcaNombre()}"></td>
+            <td th:text="${marca.getMarcaEstado()?'Activa':'Inactiva'}"></td>
             <td class="text-center">
-                <a class="btn btn-info" th:href="@{/marca/edit/{id} (id=${marca.getMarca_id()})}">Editar</a>
-                <a class="btn" th:classappend="${marca.getMarca_estado() ? 'btn-danger' : 'btn-success'}" th:href="@{/marca/deshabilitarHabilitar/{id} (id=${marca.getMarca_id()})}" th:text="${marca.getMarca_estado()?'Deshabilitar':'Habilitar'}"></a>
+                <a class="btn btn-info" th:href="@{/marca/edit/{id} (id=${marca.getMarcaId()})}">Editar</a>
+                <a class="btn" th:classappend="${marca.getMarcaEstado() ? 'btn-danger' : 'btn-success'}" th:href="@{/marca/deshabilitarHabilitar/{id} (id=${marca.getMarcaId()})}" th:text="${marca.getMarcaEstado()?'Deshabilitar':'Habilitar'}"></a>
             </td>
         </tr>
         </tbody>

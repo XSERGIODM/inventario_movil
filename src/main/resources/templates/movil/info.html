@@ -43,30 +43,30 @@
             <div class="row">
                 <div class="col-lg-6">
                     <img class="img-thumbnail rounded"
-                         th:src="@{/images/{img} (img = ${movil.getMovil_imagen()})}" alt="holi">
+                         th:src="@{/images/{img} (img = ${movil.getMovilImagen()})}" alt="">
                 </div>
                 <div class="col-lg-6">
-                    <input type="hidden" th:value="${movil.getMovil_id()}" name="id">
+                    <input type="hidden" th:value="${movil.getMovilId()}" name="id">
                     <h2 class="card-title"
-                        th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_nombre()} + ' ' + ${movil.getMovil_modelo().getModelo_nombre()}"></h2>
-                    <h5 th:text="'Precio minimo: $'+${#numbers.formatDecimal(movil.getMovil_precio_publico(), 1, 'POINT', 0, 'COMMA')}"></h5>
+                        th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaNombre()} + ' ' + ${movil.getMovilModelo().getModeloNombre()}"></h2>
+                    <h5 th:text="'Precio minimo: $'+${#numbers.formatDecimal(movil.getMovilPrecioPublico(), 1, 'POINT', 0, 'COMMA')}"></h5>
                     <br>
                     <div class="row">
                         <div class="col">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <p><strong>IMEI 1:</strong> <span th:text="${movil.getMovil_imei1()}"></span>
+                                    <p><strong>IMEI 1:</strong> <span th:text="${movil.getMovilImei1()}"></span>
                                     </p>
                                 </li>
                                 <li class="list-group-item">
-                                    <p><strong>Gigas:</strong> <span th:text="${movil.getMovil_gigas()}"></span></p>
+                                    <p><strong>Gigas:</strong> <span th:text="${movil.getMovilGigas()}"></span></p>
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>% de bateria:</strong> <span
-                                            th:text="${movil.getMovil_bateria()}"></span></p>
+                                            th:text="${movil.getMovilBateria()}"></span></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <p><strong>Calidad:</strong> <span th:text="${movil.getMovil_calidad()}"></span>
+                                    <p><strong>Calidad:</strong> <span th:text="${movil.getMovilCalidad()}"></span>
                                     </p>
                                 </li>
                             </ul>
@@ -74,22 +74,22 @@
                         <div class="col">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <p><strong>IMEI 2:</strong> <span th:text="${movil.getMovil_imei2()}"></span>
+                                    <p><strong>IMEI 2:</strong> <span th:text="${movil.getMovilImei2()}"></span>
                                     </p>
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Color:</strong> <span
-                                            th:text="${movil.getMovil_color().getColor_nombre()}"></span></p>
+                                            th:text="${movil.getMovilColor().getColorNombre()}"></span></p>
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Marca:</strong> <span
-                                            th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_marca().getMarca_nombre()}"></span>
+                                            th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaMarca().getMarcaNombre()}"></span>
                                     </p>
                                 </li>
                                 <li class="list-group-item">
                                     <p th:each="contexto : ${movil.getContextos()}"
-                                       th:if="${contexto.getContexto_estado()}"><strong>Ubicación actual:</strong> <span
-                                            th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></span>
+                                       th:if="${contexto.getContextoEstado()}"><strong>Ubicación actual:</strong> <span
+                                            th:text="${contexto.getContextoUbicacion().getUbicacionNombre()}"></span>
                                     </p>
                                 </li>
                             </ul>
@@ -98,7 +98,7 @@
                     <ul class="list-group">
                         <li class="list-group-item">
                             <p><strong>Descripción:</strong> <span
-                                    th:text="${movil.getMovil_observaciones()}"></span></p>
+                                    th:text="${movil.getMovilObservaciones()}"></span></p>
                         </li>
                     </ul>
                     <br>
@@ -130,12 +130,12 @@
                                 <div class="modal-body">
                                     <p style="font-size: 20px;"
                                        th:each="contexto : ${movil.getContextos()}"
-                                       th:if="${contexto.getContexto_estado()}">
+                                       th:if="${contexto.getContextoEstado()}">
                                         La ubicación actual es <strong
-                                            th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></strong>
+                                            th:text="${contexto.getContextoUbicacion().getUbicacionNombre()}"></strong>
                                         se entregó en esta fecha <strong
-                                            th:text="${#temporals.format(contexto.contexto_fecha_entrada, 'dd/MM/yyyy HH:mm:ss')}"></strong>
-                                        por el motivo de <strong th:text="${contexto.getContexto_detalle()}"></strong>
+                                            th:text="${#temporals.format(contexto.getContextoFechaEntrada, 'dd/MM/yyyy HH:mm:ss')}"></strong>
+                                        por el motivo de <strong th:text="${contexto.getContextoDetalle()}"></strong>
                                     </p>
                                 </div>
                                 <div class="modal-body">
@@ -152,12 +152,12 @@
                                             </thead>
                                             <tbody class="table-hover">
                                             <tr th:each="contexto : ${movil.getContextos()}"
-                                                th:unless="${contexto.getContexto_estado()}">
-                                                <td th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></td>
-                                                <td th:text="${#temporals.format(contexto.contexto_fecha_entrada, 'dd/MM/yyyy HH:mm:ss')}"></td>
-                                                <td th:text="${contexto.getContexto_detalle()}"></td>
-                                                <td th:text="${#temporals.format(contexto.contexto_fecha_salida, 'dd/MM/yyyy HH:mm:ss')}"></td>
-                                                <td th:text="${contexto.getContexto_detalle_salida()}"></td>
+                                                th:unless="${contexto.getContextoEstado()}">
+                                                <td th:text="${contexto.getContextoUbicacion().getUbicacionNombre()}"></td>
+                                                <td th:text="${#temporals.format(contexto.getContextoFechaEntrada, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                <td th:text="${contexto.getContextoDetalle()}"></td>
+                                                <td th:text="${#temporals.format(contexto.getContextoFechaSalida, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                                                <td th:text="${contexto.getContextoDetalleSalida()}"></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -189,37 +189,37 @@
                                 <div class="modal-body">
                                     <form class="form-horizontal" th:action="@{/contexto/save}" method="post"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="contexto_id"
-                                               th:value="${contextoActual.getContexto_id()}">
-                                        <input type="hidden" name="contexto_movil"
-                                               th:value="${contextoActual.getContexto_movil().getMovil_id()}">
+                                        <input type="hidden" name="contextoId"
+                                               th:value="${contextoActual.getContextoId()}">
+                                        <input type="hidden" name="contextoMovil"
+                                               th:value="${contextoActual.getContextoMovil().getMovilId()}">
                                         <div class="form-group">
                                             <label class="control-label col-sm-2"
-                                                   for="contexto_detalle_salida">Salida actual:</label>
+                                                   for="contextoDetalleSalida">Salida actual:</label>
                                             <div class="col-sm-10">
-                <textarea class="form-control" id="contexto_detalle_salida" name="contexto_detalle_salida"
+                <textarea class="form-control" id="contextoDetalleSalida" name="contextoDetalleSalida"
                           placeholder="Ingrese los detalles de la salida del dispositivo" required
                           autocomplete="off"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for="contexto_ubicacion">Nueva
+                                            <label class="control-label col-sm-2" for="contextoUbicacion">Nueva
                                                 ubicación: </label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="contexto_ubicacion"
-                                                        name="contexto_ubicacion" required>
+                                                <select class="form-control" id="contextoUbicacion"
+                                                        name="contextoUbicacion" required>
                                                     <option value="">Seleccione la ubicación nueva</option>
                                                     <option th:each="ubicacion: ${ubicaciones}"
-                                                            th:value="${ubicacion.getUbicacion_id()}"
-                                                            th:text="${ubicacion.getUbicacion_nombre()}">
+                                                            th:value="${ubicacion.getUbicacionId()}"
+                                                            th:text="${ubicacion.getUbicacionNombre()}">
                                                     </option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-sm-2"
-                                                       for="contexto_detalle">Nueva entrada: </label>
+                                                       for="contextoDetalle">Nueva entrada: </label>
                                                 <div class="col-sm-10">
-                <textarea class="form-control" id="contexto_detalle" name="contexto_detalle"
+                <textarea class="form-control" id="contextoDetalle" name="contextoDetalle"
                           placeholder="Ingrese los detalles de la nueva entrada del dispositivo" required
                           autocomplete="off"></textarea>
                                                 </div>

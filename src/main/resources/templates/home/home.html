@@ -56,16 +56,16 @@
     <div class="row ">
         <div class="col-lg-3 col-md-6 mb-4" th:each="movil : ${moviles}">
             <div class="card h-100">
-                <img class="card-img-top" th:src="@{/images/{img} (img = ${movil.getMovil_imagen()})}" alt="">
+                <img class="card-img-top" th:src="@{/images/{img} (img = ${movil.getMovilImagen()})}" alt="">
                 <div class="card-body">
-                    <p class="card-text text-center"><strong th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_nombre()} + ' ' + ${movil.getMovil_modelo().getModelo_nombre()}"></strong></p>
+                    <p class="card-text text-center"><strong th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaNombre()} + ' ' + ${movil.getMovilModelo().getModeloNombre()}"></strong></p>
                     <p class="card-text"
-                       th:text="'Precio: $'+${#numbers.formatDecimal(movil.getMovil_precio_publico(), 1, 'POINT', 2, 'COMMA')}"></p>
-                    <p class="card-text" th:text="'Gigas: ' + ${movil.getMovil_gigas()}"></p>
-                    <p class="card-text" th:text="'Bateria: %' + ${movil.getMovil_bateria()}"></p>
-                    <p class="card-text" th:text="'Color: ' + ${movil.getMovil_color().getColor_nombre()}"></p>
-                    <p class="card-text" th:text="'Calidad: ' + ${movil.getMovil_calidad()} + '/10'"></p>
-                    <p class="card-text" th:text="'Detalles: ' + ${movil.getMovil_observaciones()}"></p>
+                       th:text="'Precio: $'+${#numbers.formatDecimal(movil.getMovilPrecioPublico(), 1, 'POINT', 2, 'COMMA')}"></p>
+                    <p class="card-text" th:text="'Gigas: ' + ${movil.getMovilGigas()}"></p>
+                    <p class="card-text" th:text="'Bateria: %' + ${movil.getMovilBateria()}"></p>
+                    <p class="card-text" th:text="'Color: ' + ${movil.getMovilColor().getColorNombre()}"></p>
+                    <p class="card-text" th:text="'Calidad: ' + ${movil.getMovilCalidad()} + '/10'"></p>
+                    <p class="card-text" th:text="'Detalles: ' + ${movil.getMovilObservaciones()}"></p>
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-success">

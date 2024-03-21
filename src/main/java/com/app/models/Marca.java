@@ -16,11 +16,11 @@ import java.util.List;
 public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long marca_id;
-    String marca_nombre;
-    Boolean marca_estado;
+    Long marcaId;
+    String marcaNombre;
+    Boolean marcaEstado;
 
-    @OneToMany(mappedBy = "familia_marca", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "familiaMarca", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
     @ToString.Exclude
     List<Familia> familias = new ArrayList<>();

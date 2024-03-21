@@ -41,14 +41,14 @@
     <h2>Actualizar marca</h2>
     <br>
     <form class="form-horizontal" th:action="@{/marca/update}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="marca_id" th:value="${marca.getMarca_id()}">
-        <input type="hidden" name="marca_estado" th:value="${marca.getMarca_estado()}">
+        <input type="hidden" name="marcaId" th:value="${marca.getMarcaId()}">
+        <input type="hidden" name="marcaEstado" th:value="${marca.getMarcaEstado()}">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="marca_nombre">Nombre:</label>
+            <label class="control-label col-sm-2" for="marcaNombre">Nombre:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="marca_nombre" name="marca_nombre"
+                <input type="text" class="form-control" id="marcaNombre" name="marcaNombre"
                        placeholder="Ingrese el nombre de la marca" autocomplete="off" required
-                       th:value="${marca.getMarca_nombre()}">
+                       th:value="${marca.getMarcaNombre()}">
             </div>
         </div>
         <br>

@@ -16,6 +16,8 @@
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+
 
 </head>
 
@@ -50,15 +52,15 @@
         </tr>
         </thead>
         <tbody class="table-hover ">
-        <tr th:classappend="${ubicacion.getUbicacion_estado() ? 'table-light' : 'table-danger'}"
+        <tr th:classappend="${ubicacion.getUbicacionEstado() ? 'table-light' : 'table-danger'}"
             th:each="ubicacion:${ubicaciones}">
-            <td th:text="${ubicacion.getUbicacion_nombre()}"></td>
-            <td th:text="${ubicacion.getUbicacion_estado()?'Activa':'Inactiva'}"></td>
+            <td th:text="${ubicacion.getUbicacionNombre()}"></td>
+            <td th:text="${ubicacion.getUbicacionEstado()?'Activa':'Inactiva'}"></td>
             <td class="text-center">
-                <a class="btn btn-info" th:href="@{/ubicacion/edit/{id} (id=${ubicacion.getUbicacion_id()})}">Editar</a>
-                <a class="btn" th:classappend="${ubicacion.getUbicacion_estado() ? 'btn-danger' : 'btn-success'}"
-                   th:href="@{/ubicacion/deshabilitarHabilitar/{id} (id=${ubicacion.getUbicacion_id()})}"
-                   th:text="${ubicacion.getUbicacion_estado()?'Deshabilitar':'Habilitar'}"></a>
+                <a class="btn btn-info" th:href="@{/ubicacion/edit/{id} (id=${ubicacion.getUbicacionId()})}">Editar</a>
+                <a class="btn" th:classappend="${ubicacion.getUbicacionEstado() ? 'btn-danger' : 'btn-success'}"
+                   th:href="@{/ubicacion/deshabilitarHabilitar/{id} (id=${ubicacion.getUbicacionId()})}"
+                   th:text="${ubicacion.getUbicacionEstado()?'Deshabilitar':'Habilitar'}"></a>
             </td>
         </tr>
         </tbody>

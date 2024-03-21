@@ -20,13 +20,13 @@ public class ContextoServiceImpl implements ContextoService {
 
     @Override
     public Contexto save(Contexto contexto) {
-        log.info("Contexto save=  " + contexto.getContexto_id());
+        log.info("Contexto save=  " + contexto.getContextoId());
         Contexto newContexto = new Contexto();
-        newContexto.setContexto_movil(contexto.getContexto_movil());
-        newContexto.setContexto_ubicacion(contexto.getContexto_ubicacion());
-        newContexto.setContexto_detalle(contexto.getContexto_detalle());
-        newContexto.setContexto_estado(true);
-        newContexto.setContexto_fecha_entrada(LocalDateTime.now());
+        newContexto.setContextoMovil(contexto.getContextoMovil());
+        newContexto.setContextoUbicacion(contexto.getContextoUbicacion());
+        newContexto.setContextoDetalle(contexto.getContextoDetalle());
+        newContexto.setContextoEstado(true);
+        newContexto.setContextoFechaEntrada(LocalDateTime.now());
         return contextoRepository.save(newContexto);
     }
 
@@ -39,10 +39,10 @@ public class ContextoServiceImpl implements ContextoService {
     @Override
     public Contexto update(Contexto contexto) {
         log.info("Contexto update:  " + contexto);
-        Contexto contextoAux = findById(contexto.getContexto_id());
-        contextoAux.setContexto_fecha_salida(LocalDateTime.now());
-        contextoAux.setContexto_estado(false);
-        contextoAux.setContexto_detalle_salida(contexto.getContexto_detalle_salida());
+        Contexto contextoAux = findById(contexto.getContextoId());
+        contextoAux.setContextoFechaSalida(LocalDateTime.now());
+        contextoAux.setContextoEstado(false);
+        contextoAux.setContextoDetalleSalida(contexto.getContextoDetalleSalida());
         return contextoRepository.save(contextoAux);
     }
 

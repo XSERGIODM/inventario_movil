@@ -19,8 +19,8 @@ public class UbicacionServiceImpl implements UbicacionService {
 
     @Override
     public Ubicacion save(Ubicacion ubicacion) {
-        ubicacion.setUbicacion_id(null);
-        ubicacion.setUbicacion_estado(true);
+        ubicacion.setUbicacionId(null);
+        ubicacion.setUbicacionEstado(true);
         return ubicacionRepository.save(ubicacion);
     }
 
@@ -41,7 +41,7 @@ public class UbicacionServiceImpl implements UbicacionService {
 
     @Override
     public Ubicacion update(Ubicacion ubicacion) {
-        if (ubicacion.getUbicacion_id() == null)
+        if (ubicacion.getUbicacionId() == null)
             throw new RuntimeException("El id de la ubicacion no puede ser nulo");
         return ubicacionRepository.save(ubicacion);
     }
@@ -49,7 +49,7 @@ public class UbicacionServiceImpl implements UbicacionService {
     @Override
     public void deshabilitarHabilitar(Long id) {
         Ubicacion ubicacion = findById(id);
-        ubicacion.setUbicacion_estado(!ubicacion.getUbicacion_estado());
+        ubicacion.setUbicacionEstado(!ubicacion.getUbicacionEstado());
         ubicacionRepository.save(ubicacion);
     }
 }

@@ -16,37 +16,37 @@ import java.util.List;
 public class Movil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long movil_id;
+    Long movilId;
 
-    String movil_imei1;
+    String movilImei1;
 
-    String movil_imei2;
+    String movilImei2;
 
-    Integer movil_bateria;
+    Integer movilBateria;
 
-    Integer movil_gigas;
+    Integer movilGigas;
 
-    Double movil_precio_publico;
+    Double movilPrecioPublico;
 
-    Integer movil_calidad;
+    Integer movilCalidad;
 
-    String movil_observaciones;
+    String movilObservaciones;
 
-    Boolean movil_estado;
+    Boolean movilEstado;
 
-    String movil_imagen;
+    String movilImagen;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "movil_color_id")
     @ToString.Exclude
-    Color movil_color;
+    Color movilColor;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "movil_modelo_id")
     @ToString.Exclude
-    Moodelo movil_modelo;
+    Moodelo movilModelo;
 
-    @OneToMany(mappedBy = "contexto_movil", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "contextoMovil", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
     @ToString.Exclude
     List<Contexto> contextos = new ArrayList<>();

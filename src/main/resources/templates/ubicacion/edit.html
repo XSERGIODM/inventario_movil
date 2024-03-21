@@ -41,14 +41,14 @@
     <h2>Actualizar ubicación</h2>
     <br>
     <form class="form-horizontal" th:action="@{/ubicacion/update}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="ubicacion_id" th:value="${ubicacion.getUbicacion_id()}">
-        <input type="hidden" name="ubicacion_estado" th:value="${ubicacion.getUbicacion_estado()}">
+        <input type="hidden" name="ubicacionId" th:value="${ubicacion.getUbicacionId()}">
+        <input type="hidden" name="ubicacionEstado" th:value="${ubicacion.getUbicacionEstado()}">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="ubicacion_nombre">Ubicación:</label>
+            <label class="control-label col-sm-2" for="ubicacionNombre">Ubicación:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" id="ubicacion_nombre" name="ubicacion_nombre"
+                <textarea class="form-control" id="ubicacionNombre" name="ubicacionNombre"
                           placeholder="Ingrese la ubicación" required
-                          autocomplete="off" th:text="${ubicacion.getUbicacion_nombre()}"></textarea>
+                          autocomplete="off" th:text="${ubicacion.getUbicacionNombre()}"></textarea>
             </div>
         </div>
         <div class="row">

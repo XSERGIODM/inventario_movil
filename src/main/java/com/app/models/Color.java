@@ -18,7 +18,7 @@ import lombok.experimental.FieldDefaults;
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long color_id;
-    String color_nombre;
-    Boolean color_estado;
+    Long colorId;
+    String colorNombre;
+    Boolean colorEstado;
 }

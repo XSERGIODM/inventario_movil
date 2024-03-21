@@ -64,13 +64,13 @@
         </tr>
         </thead>
         <tbody class="table-hover">
-        <tr th:classappend="${familia.getFamilia_estado() ? 'table-light' : 'table-danger'}" th:each="familia:${familias}">
-            <td th:text="${familia.getFamilia_marca().getMarca_nombre()}"></td>
-            <td th:text="${familia.getFamilia_nombre()}"></td>
-            <td th:text="${familia.getFamilia_estado()?'Activa':'Inactiva'}"></td>
+        <tr th:classappend="${familia.getFamiliaEstado() ? 'table-light' : 'table-danger'}" th:each="familia:${familias}">
+            <td th:text="${familia.getFamiliaMarca().getMarcaNombre()}"></td>
+            <td th:text="${familia.getFamiliaNombre()}"></td>
+            <td th:text="${familia.getFamiliaEstado()?'Activa':'Inactiva'}"></td>
             <td class="text-center">
-                <a class="btn btn-info" th:href="@{/familia/edit/{id} (id=${familia.getFamilia_id()})}">Editar</a>
-                <a class="btn" th:classappend="${familia.getFamilia_estado() ? 'btn-danger' : 'btn-success'}" th:href="@{/familia/deshabilitarHabilitar/{id} (id=${familia.getFamilia_id()})}" th:text="${familia.getFamilia_estado()?'Deshabilitar':'Habilitar'}"></a>
+                <a class="btn btn-info" th:href="@{/familia/edit/{id} (id=${familia.getFamiliaId()})}">Editar</a>
+                <a class="btn" th:classappend="${familia.getFamiliaEstado() ? 'btn-danger' : 'btn-success'}" th:href="@{/familia/deshabilitarHabilitar/{id} (id=${familia.getFamiliaId()})}" th:text="${familia.getFamiliaEstado()?'Deshabilitar':'Habilitar'}"></a>
             </td>
         </tr>
         </tbody>

@@ -18,14 +18,14 @@ public class FamiliaImpl implements FamiliaService {
 
     @Override
     public Familia save(Familia familia) {
-        familia.setFamilia_id(null);
-        familia.setFamilia_estado(true);
+        familia.setFamiliaId(null);
+        familia.setFamiliaEstado(true);
         return familiaRepository.save(familia);
     }
 
     @Override
     public Familia update(Familia familia) {
-        if (familia.getFamilia_id() == null)
+        if (familia.getFamiliaId() == null)
             throw new RuntimeException("El id de la familia no puede ser nulo"
                     + " para actualizar un registro");
         return familiaRepository.save(familia);
@@ -49,7 +49,7 @@ public class FamiliaImpl implements FamiliaService {
         Familia familia = findById(id);
         if (familia == null)
             throw new RuntimeException("La familia con id " + id + " no existe");
-        familia.setFamilia_estado(!familia.getFamilia_estado());
+        familia.setFamiliaEstado(!familia.getFamiliaEstado());
         familiaRepository.save(familia);
     }
 }

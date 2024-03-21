@@ -19,8 +19,8 @@ public class ModeloServiceImpl implements ModeloService {
 
     @Override
     public Moodelo save(Moodelo modelo) {
-        modelo.setModelo_id(null);
-        modelo.setModelo_estado(true);
+        modelo.setModeloId(null);
+        modelo.setModeloEstado(true);
         return modeloRepository.save(modelo);
     }
 
@@ -31,7 +31,7 @@ public class ModeloServiceImpl implements ModeloService {
 
     @Override
     public Moodelo update(Moodelo modelo) {
-        if (modelo.getModelo_id() == null)
+        if (modelo.getModeloId() == null)
             throw new RuntimeException("El id del modelo no puede ser nulo");
 
         return modeloRepository.save(modelo);
@@ -50,7 +50,7 @@ public class ModeloServiceImpl implements ModeloService {
     @Override
     public void deshabilitarHabilitar(Long id) {
         Moodelo modelo = findById(id);
-        modelo.setModelo_estado(!modelo.getModelo_estado());
+        modelo.setModeloEstado(!modelo.getModeloEstado());
         update(modelo);
     }
 }

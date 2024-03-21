@@ -15,22 +15,22 @@ import java.time.LocalDateTime;
 public class Contexto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long contexto_id;
-    String contexto_detalle;
-    String contexto_detalle_salida;
-    Boolean contexto_estado;
+    Long contextoId;
+    String contextoDetalle;
+    String contextoDetalleSalida;
+    Boolean contextoEstado;
     @Column(columnDefinition = "TIMESTAMP")
-    LocalDateTime contexto_fecha_entrada;
-    LocalDateTime contexto_fecha_salida;
+    LocalDateTime contextoFechaEntrada;
+    LocalDateTime contextoFechaSalida;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contexto_movil_id")
     @JsonIgnore
     @ToString.Exclude
-    Movil contexto_movil;
+    Movil contextoMovil;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contexto_ubicacion_id")
-    Ubicacion contexto_ubicacion;
+    Ubicacion contextoUbicacion;
 
 }

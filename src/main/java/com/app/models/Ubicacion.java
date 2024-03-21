@@ -18,7 +18,7 @@ import lombok.experimental.FieldDefaults;
 public class Ubicacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long ubicacion_id;
-    String ubicacion_nombre;
-    Boolean ubicacion_estado;
+    Long ubicacionId;
+    String ubicacionNombre;
+    Boolean ubicacionEstado;
 }

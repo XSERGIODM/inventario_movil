@@ -19,8 +19,8 @@ public class MarcaServiceImpl implements MarcaService {
 
     @Override
     public Marca save(Marca marca) {
-        marca.setMarca_id(null);
-        marca.setMarca_estado(true);
+        marca.setMarcaId(null);
+        marca.setMarcaEstado(true);
         return marcaRepository.save(marca);
     }
 
@@ -41,12 +41,12 @@ public class MarcaServiceImpl implements MarcaService {
 
     @Override
     public Marca update(Marca marca) {
-        if (marca.getMarca_id() == null)
+        if (marca.getMarcaId() == null)
             throw new RuntimeException("El id de la marca no puede ser nulo");
-        Marca marcaAux = marcaRepository.findById(marca.getMarca_id()).orElse(null);
+        Marca marcaAux = marcaRepository.findById(marca.getMarcaId()).orElse(null);
         if (marcaAux == null)
-            throw new RuntimeException("La marca con id " + marca.getMarca_id() + " no existe");
-        marcaAux.setMarca_nombre(marca.getMarca_nombre());
+            throw new RuntimeException("La marca con id " + marca.getMarcaId() + " no existe");
+        marcaAux.setMarcaNombre(marca.getMarcaNombre());
         return marcaRepository.save(marcaAux);
     }
 
@@ -55,7 +55,7 @@ public class MarcaServiceImpl implements MarcaService {
         Marca marca = marcaRepository.findById(id).orElse(null);
         if (marca == null)
             throw new RuntimeException("La marca con id " + id + " no existe");
-        marca.setMarca_estado(!marca.getMarca_estado());
+        marca.setMarcaEstado(!marca.getMarcaEstado());
         marcaRepository.save(marca);
     }
 }

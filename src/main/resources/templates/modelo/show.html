@@ -66,16 +66,16 @@
         </tr>
         </thead>
         <tbody class="table-hover">
-        <tr th:classappend="${modelo.getModelo_estado() ? 'table-light' : 'table-danger'}" th:each="modelo:${modelos}">
-            <td th:text="${modelo.getModelo_familia().getFamilia_marca().getMarca_nombre()}"></td>
-            <td th:text="${modelo.getModelo_familia().getFamilia_nombre()}"></td>
-            <td th:text="${modelo.getModelo_nombre()}"></td>
-            <td th:text="${modelo.getModelo_estado()?'Activa':'Inactiva'}"></td>
+        <tr th:classappend="${modelo.getModeloEstado() ? 'table-light' : 'table-danger'}" th:each="modelo:${modelos}">
+            <td th:text="${modelo.getModeloFamilia().getFamiliaMarca().getMarcaNombre()}"></td>
+            <td th:text="${modelo.getModeloFamilia().getFamiliaNombre()}"></td>
+            <td th:text="${modelo.getModeloNombre()}"></td>
+            <td th:text="${modelo.getModeloEstado()?'Activa':'Inactiva'}"></td>
             <td class="text-center">
-                <a class="btn btn-info" th:href="@{/modelo/edit/{id} (id=${modelo.getModelo_id()})}">Editar</a>
-                <a class="btn" th:classappend="${modelo.getModelo_estado() ? 'btn-danger' : 'btn-success'}"
-                   th:href="@{/modelo/deshabilitarHabilitar/{id} (id=${modelo.getModelo_id()})}"
-                   th:text="${modelo.getModelo_estado()?'Deshabilitar':'Habilitar'}"></a>
+                <a class="btn btn-info" th:href="@{/modelo/edit/{id} (id=${modelo.getModeloId()})}">Editar</a>
+                <a class="btn" th:classappend="${modelo.getModeloEstado() ? 'btn-danger' : 'btn-success'}"
+                   th:href="@{/modelo/deshabilitarHabilitar/{id} (id=${modelo.getModeloId()})}"
+                   th:text="${modelo.getModeloEstado()?'Deshabilitar':'Habilitar'}"></a>
             </td>
         </tr>
         </tbody>

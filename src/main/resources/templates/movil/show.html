@@ -71,23 +71,23 @@
         </tr>
         </thead>
         <tbody class="table-hover">
-        <tr th:classappend="${movil.getMovil_estado() ? 'table-light' : 'table-danger'}" th:each="movil:${moviles}">
-            <td th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_marca().getMarca_nombre()}"></td>
-            <td th:text="${movil.getMovil_modelo().getModelo_familia().getFamilia_nombre()}"></td>
-            <td th:text="${movil.getMovil_modelo().getModelo_nombre()}"></td>
-            <td th:text="${movil.getMovil_imei1()}"></td>
-            <td th:text="${movil.getMovil_color().getColor_nombre()}"></td>
-            <td th:text="${movil.getMovil_gigas()}"></td>
-            <td th:text="${movil.getMovil_bateria()}"></td>
-            <td th:text="'$'+${#numbers.formatDecimal(movil.getMovil_precio_publico(), 1, 'POINT', 0, 'COMMA')}"></td>
-            <td th:text="${movil.getMovil_calidad()}+'/10'"></td>
-            <td th:text="${movil.getMovil_observaciones()}"></td>
-            <td th:each="contexto : ${movil.getContextos()}" th:if="${contexto.getContexto_estado()}"
-                th:text="${contexto.getContexto_ubicacion().getUbicacion_nombre()}"></td>
-            <td th:text="${movil.getMovil_estado()?'Si':'No'}"></td>
+        <tr th:classappend="${movil.getMovilEstado() ? 'table-light' : 'table-danger'}" th:each="movil:${moviles}">
+            <td th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaMarca().getMarcaNombre()}"></td>
+            <td th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaNombre()}"></td>
+            <td th:text="${movil.getMovilModelo().getModeloNombre()}"></td>
+            <td th:text="${movil.getMovilImei1()}"></td>
+            <td th:text="${movil.getMovilColor().getColorNombre()}"></td>
+            <td th:text="${movil.getMovilGigas()}"></td>
+            <td th:text="${movil.getMovilBateria()}"></td>
+            <td th:text="'$'+${#numbers.formatDecimal(movil.getMovilPrecioPublico(), 1, 'POINT', 0, 'COMMA')}"></td>
+            <td th:text="${movil.getMovilCalidad()}+'/10'"></td>
+            <td th:text="${movil.getMovilObservaciones()}"></td>
+            <td th:each="contexto : ${movil.getContextos()}" th:if="${contexto.getContextoEstado()}"
+                th:text="${contexto.getContextoUbicacion().getUbicacionNombre()}"></td>
+            <td th:text="${movil.getMovilEstado()?'Si':'No'}"></td>
             <td>
-                <a class="btn btn-info" th:href="@{/movil/info/{id} (id=${movil.getMovil_id()})}">Info</a>
-                <a class="btn btn-light" th:href="@{/movil/edit/{id} (id=${movil.getMovil_id()})}">Editar</a>
+                <a class="btn btn-info" th:href="@{/movil/info/{id} (id=${movil.getMovilId()})}">Info</a>
+                <a class="btn btn-light" th:href="@{/movil/edit/{id} (id=${movil.getMovilId()})}">Editar</a>
             </td>
         </tr>
         </tbody>

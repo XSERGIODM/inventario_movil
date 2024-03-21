@@ -14,15 +14,15 @@ public class Moodelo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long modelo_id;
-    String modelo_nombre;
-    Boolean modelo_estado;
+    Long modeloId;
+    String modeloNombre;
+    Boolean modeloEstado;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "modelo_familia_id")
     @JsonIgnore
     @ToString.Exclude
-    Familia modelo_familia;
+    Familia modeloFamilia;
 
 
 }
