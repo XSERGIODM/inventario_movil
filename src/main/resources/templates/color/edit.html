@@ -35,20 +35,20 @@
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/ubicacion/show}">Ver ubicaciones</a></li>
-        <li class="breadcrumb-item active">Actualizar ubicación</li>
+        <li class="breadcrumb-item"><a th:href="@{/ubicacion/show}">Ver colores</a></li>
+        <li class="breadcrumb-item active">Actualizar color</li>
     </ol>
-    <h2>Actualizar ubicación</h2>
+    <h2>Actualizar color</h2>
     <br>
-    <form class="form-horizontal" th:action="@{/ubicacion/update}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="ubicacion_id" th:value="${ubicacion.getUbicacion_id()}">
-        <input type="hidden" name="ubicacion_estado" th:value="${ubicacion.getUbicacion_estado()}">
+    <form class="form-horizontal" th:action="@{/color/update}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="colorId" th:value="${color.getColorId()}">
+        <input type="hidden" name="colorEstado" th:value="${color.getColorEstado()}">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="ubicacion_nombre">Ubicación:</label>
+            <label class="control-label col-sm-2" for="colorNombre">Nombre:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" id="ubicacion_nombre" name="ubicacion_nombre"
-                          placeholder="Ingrese la ubicación" required
-                          autocomplete="off" th:text="${ubicacion.getUbicacion_nombre()}"></textarea>
+                <input type="text" class="form-control" id="colorNombre" name="colorNombre"
+                       placeholder="Ingrese el nombre del color" autocomplete="off" required
+                       th:value="${color.getColorNombre()}">
             </div>
         </div>
         <div class="row">
@@ -56,7 +56,7 @@
                 <button type="submit" class="btn btn-success" id="saveButton">
                     <span class="glyphicon glyphicon-saved">Actualizar</span>
                 </button>
-                <a th:href="@{/ubicacion/show}" class="btn btn-warning">
+                <a th:href="@{/color/show}" class="btn btn-warning">
                     <span class="glyphicon glyphicon-saved">Cancelar</span>
                 </a>
             </div>

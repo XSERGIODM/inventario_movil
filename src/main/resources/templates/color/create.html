@@ -35,18 +35,17 @@
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/ubicacion/show}">Ver ubicaciones</a></li>
-        <li class="breadcrumb-item active">Registrar ubicación</li>
+        <li class="breadcrumb-item"><a th:href="@{/color/show}">Ver colores</a></li>
+        <li class="breadcrumb-item active">Registrar color</li>
     </ol>
-    <h2>Agregar ubicación</h2>
+    <h2>Agregar color</h2>
     <br>
-    <form class="form-horizontal" th:action="@{/ubicacion/save}" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" th:action="@{/color/save}" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="ubicacion_nombre">Ubicación:</label>
+            <label class="control-label col-sm-2" for="colorNombre">Nombre:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" id="ubicacion_nombre" name="ubicacion_nombre"
-                          placeholder="Ingrese la ubicación" required
-                          autocomplete="off"></textarea>
+                <input type="text" class="form-control" id="colorNombre" name="colorNombre"
+                       placeholder="Ingrese el nombre del color" autocomplete="off" required>
             </div>
         </div>
         <br>
@@ -55,7 +54,7 @@
                 <button type="submit" class="btn btn-success" id="saveButton">
                     <span class="glyphicon glyphicon-saved">Guardar</span>
                 </button>
-                <a th:href="@{/ubicacion/show}" class="btn btn-warning">
+                <a th:href="@{/color/show}" class="btn btn-warning">
                     <span class="glyphicon glyphicon-saved">Cancelar</span>
                 </a>
             </div>
