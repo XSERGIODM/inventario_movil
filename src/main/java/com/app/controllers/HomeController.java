@@ -23,7 +23,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         List<Movil> moviles = movilService.findAll();
-        moviles.removeIf(movil -> !movil.getMovil_estado());
+        moviles.removeIf(movil -> !movil.getMovilEstado());
         model.addAttribute("moviles", moviles);
         return "home/home";
     }

@@ -6,12 +6,15 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/color")
@@ -59,5 +62,11 @@ public class ColorController {
     public String delete(@PathVariable("id") Long id) {
         colorService.deshabilitarHabilitar(id);
         return "redirect:/color/show";
+    }
+    @GetMapping("/colores")
+    public ResponseEntity<List<Color>> getColores() {
+        List<Color> colores = colorService.findAll();
+        colores.removeIf(color -> !color.getColorEstado());
+        return ResponseEntity.ok(colores);
     }
 }

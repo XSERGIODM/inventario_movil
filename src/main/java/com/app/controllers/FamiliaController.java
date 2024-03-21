@@ -50,10 +50,10 @@ public class FamiliaController {
     }
     @PostMapping("/update")
     public String update(Familia familia, Marca marca) {
-        Marca marcaAux = marcaService.findById(marca.getMarca_id());
-        Familia familiaAux = familiaService.findById(familia.getFamilia_id());
-        familiaAux.setFamilia_marca(marcaAux);
-        familiaAux.setFamilia_nombre(familia.getFamilia_nombre());
+        Marca marcaAux = marcaService.findById(marca.getMarcaId());
+        Familia familiaAux = familiaService.findById(familia.getFamiliaId());
+        familiaAux.setFamiliaMarca(marcaAux);
+        familiaAux.setFamiliaNombre(familia.getFamiliaNombre());
         familiaService.update(familiaAux);
         return "redirect:/familia/show";
     }

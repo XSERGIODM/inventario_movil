@@ -49,23 +49,24 @@ public class MovilController {
     public String create(Model model) {
         model.addAttribute("marcas", marcaService.findAll());
         List<Color> colores = colorService.findAll();
-        colores.removeIf(color -> !color.getColor_estado());
+        colores.removeIf(color -> !color.getColorEstado());
         model.addAttribute("colores", colores);
         List<Ubicacion> ubicaciones = ubicacionService.findAll();
-        ubicaciones.removeIf(ubicacion -> !ubicacion.getUbicacion_estado());
+        ubicaciones.removeIf(ubicacion -> !ubicacion.getUbicacionEstado());
         model.addAttribute("ubicaciones", ubicaciones);
         return "movil/create";
     }
 
     @PostMapping("/save")
     public String save(Movil movil, Moodelo modelo, @RequestParam("img") MultipartFile file, Contexto contexto) throws IOException {
-        Moodelo modeloAux = modeloService.findById(modelo.getModelo_id());
-        movil.setMovil_modelo(modeloAux);
-        movil.setMovil_imagen(uploadFileService.saveImage(file));
+        Moodelo modeloAux = modeloService.findById(modelo.getModeloId());
+        movil.setMovilModelo(modeloAux);
+        movil.setMovilImagen(uploadFileService.saveImage(file));
         if (movilService.save(movil) != null) {
-            contexto.setContexto_movil(movil);
-            contexto.setContexto_estado(true);
-            contexto.setContexto_fecha_entrada(LocalDateTime.now());
+            log.info("contexto " + contexto);
+            contexto.setContextoMovil(movil);
+            contexto.setContextoEstado(true);
+            contexto.setContextoFechaEntrada(LocalDateTime.now());
             contextoService.save(contexto);
             return "redirect:/movil/show";
         } else {
@@ -80,23 +81,23 @@ public class MovilController {
         model.addAttribute("familias", familiaService.findAll());
         model.addAttribute("modelos", modeloService.findAll());
         List<Color> colores = colorService.findAll();
-        colores.removeIf(color -> !color.getColor_estado());
+        colores.removeIf(color -> !color.getColorEstado());
         model.addAttribute("colores", colores);
         return "movil/edit";
     }
 
     @PostMapping("/update")
     public String update(Movil movil, Moodelo modelo, @RequestParam("img") MultipartFile file) throws IOException {
-        Moodelo modeloAux = modeloService.findById(modelo.getModelo_id());
-        movil.setMovil_modelo(modeloAux);
+        Moodelo modeloAux = modeloService.findById(modelo.getModeloId());
+        movil.setMovilModelo(modeloAux);
         if (file.isEmpty()) {
-            Movil movil1 = movilService.findById(movil.getMovil_id());
-            movil.setMovil_imagen(movil1.getMovil_imagen());
+            Movil movil1 = movilService.findById(movil.getMovilId());
+            movil.setMovilImagen(movil1.getMovilImagen());
         } else {
-            log.info("imagen: " + movil.getMovil_imagen());
-            uploadFileService.deleteImage(movil.getMovil_imagen());
-            movil.setMovil_imagen(uploadFileService.saveImage(file));
-            log.info("imagen: " + movil.getMovil_imagen());
+            log.info("imagen: " + movil.getMovilImagen());
+            uploadFileService.deleteImage(movil.getMovilImagen());
+            movil.setMovilImagen(uploadFileService.saveImage(file));
+            log.info("imagen: " + movil.getMovilImagen());
         }
         movilService.update(movil);
         return "redirect:/movil/show";
@@ -118,11 +119,11 @@ public class MovilController {
     public String info(@PathVariable(name = "id") Long id, Model model) {
         model.addAttribute("movil", movilService.findById(id));
         List<Ubicacion> ubicaciones = ubicacionService.findAll();
-        ubicaciones.removeIf(ubicacion -> !ubicacion.getUbicacion_estado());
+        ubicaciones.removeIf(ubicacion -> !ubicacion.getUbicacionEstado());
         model.addAttribute("ubicaciones", ubicaciones);
         Contexto contextoActual = new Contexto();
         for (Contexto contexto : movilService.findById(id).getContextos()) {
-            if (contexto.getContexto_estado()) {
+            if (contexto.getContextoEstado()) {
                 contextoActual = contexto;
             }
         }
@@ -135,4 +136,5 @@ public class MovilController {
         model.addAttribute("listamovil", listaMovil);
         return "home/home";
     }
+
 }

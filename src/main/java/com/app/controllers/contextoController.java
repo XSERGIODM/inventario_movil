@@ -20,11 +20,11 @@ public class contextoController {
 
     @PostMapping("/save")
     public String save(Contexto contexto) {
-        log.info(" controlador Contexto 1:  " + contexto.getContexto_movil());
+        log.info(" controlador Contexto 1:  " + contexto.getContextoMovil());
         contextoService.update(contexto);
         log.info("controlador Contexto 2:  " + contexto);
         contextoService.save(contexto);
         log.info("Contexto 3:  " + contexto);
-        return "redirect:/movil/info/" + contexto.getContexto_movil().getMovil_id() ;
+        return "redirect:/movil/info/" + contexto.getContextoMovil().getMovilId() ;
     }
 }

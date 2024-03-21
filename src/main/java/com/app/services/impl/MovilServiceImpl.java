@@ -19,8 +19,8 @@ public class MovilServiceImpl implements MovilService {
 
     @Override
     public Movil save(Movil movil) {
-        movil.setMovil_id(null);
-        movil.setMovil_estado(true);
+        movil.setMovilId(null);
+        movil.setMovilEstado(true);
         return movilRepository.save(movil);
     }
 
@@ -31,8 +31,10 @@ public class MovilServiceImpl implements MovilService {
 
     @Override
     public Movil update(Movil movil) {
-        if (movil.getMovil_id() == null)
+        if (movil.getMovilId() == null)
             throw new RuntimeException("El id del movil no puede ser nulo");
+        Movil movilDB = findById(movil.getMovilId());
+        movil.setContextos(movilDB.getContextos());
         return movilRepository.save(movil);
     }
 

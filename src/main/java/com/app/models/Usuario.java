@@ -29,6 +29,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     TipoDocumento tipoDocumento;
     Long documento;
+    Boolean estado;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "usuario_roles",

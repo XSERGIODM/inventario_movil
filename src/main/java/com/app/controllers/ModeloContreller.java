@@ -59,10 +59,10 @@ public class ModeloContreller {
     }
     @PostMapping("/update")
     public String update(Moodelo modelo, Familia familia) {
-        log.info("Modelo: " + modelo.getModelo_id());
-        log.info("Familia: " + familia.getFamilia_id());
-        Familia familiaAux = familiaService.findById(familia.getFamilia_id());
-        modelo.setModelo_familia(familiaAux);
+        log.info("Modelo: " + modelo.getModeloId());
+        log.info("Familia: " + familia.getFamiliaId());
+        Familia familiaAux = familiaService.findById(familia.getFamiliaId());
+        modelo.setModeloFamilia(familiaAux);
         modeloService.update(modelo);
         return "redirect:/modelo/show";
     }
