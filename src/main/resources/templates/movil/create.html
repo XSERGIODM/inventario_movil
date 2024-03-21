@@ -42,90 +42,100 @@
     <br>
     <form class="form-horizontal" th:action="@{/movil/save}" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="marca_id">Marca:</label>
+            <label class="control-label col-sm-2" for="marcaId">Marca:</label>
             <div class="col-sm-10">
-                <select class="form-control" id="marca_id" name="marca_id" required onchange="updateFamilias()">
+                <select class="form-control" id="marcaId" name="marcaId" required onchange="updateFamilias()">
                     <option value="">Seleccione una marca</option>
-                    <option th:each="marca : ${marcas}" th:value="${marca.getMarca_id()}"
-                            th:text="${marca.getMarca_nombre()}"></option>
+                    <option th:each="marca : ${marcas}" th:value="${marca.getMarcaId()}"
+                            th:text="${marca.getMarcaNombre()}"></option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="familia_id">Familia:</label>
+            <label class="control-label col-sm-2" for="familiaId">Familia:</label>
             <div class="col-sm-10">
-                <select class="form-control" id="familia_id" name="familia_id" required onchange="updateModelos()">
+                <select class="form-control" id="familiaId" name="familiaId" required onchange="updateModelos()">
                     <option value="" selected>Seleccione una familia</option>
                     <!-- Las opciones serán pobladas por JavaScript -->
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="modelo_id">Modelo:</label>
+            <label class="control-label col-sm-2" for="modeloId">Modelo:</label>
             <div class="col-sm-10">
-                <select class="form-control" id="modelo_id" name="modelo_id" required>
+                <select class="form-control" id="modeloId" name="modeloId" required>
                     <option value="">Seleccione un modelo</option>
                     <!-- Las opciones serán pobladas por JavaScript -->
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_imei1">IMEI 1:</label>
+            <label class="control-label col-sm-2" for="movilImei1">IMEI 1:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="movil_imei1" name="movil_imei1"
+                <input type="text" class="form-control" id="movilImei1" name="movilImei1"
                        placeholder="Ingrese el IME 1 del dispositivo" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_imei2">IMEI 2:</label>
+            <label class="control-label col-sm-2" for="movilImei2">IMEI 2:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="movil_imei2" name="movil_imei2"
+                <input type="text" class="form-control" id="movilImei2" name="movilImei2"
                        placeholder="Ingrese el IME 2 del dispositivo" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_bateria">Bateria:</label>
+            <label class="control-label col-sm-2" for="movilBateria">Bateria:</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="movil_bateria" name="movil_bateria"
+                <input type="number" class="form-control" id="movilBateria" name="movilBateria"
                        placeholder="Ingrese el % de bateria del dispositivo" autocomplete="off" required max="100"
                        min="0">
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_gigas">Gigas:</label>
+            <label class="control-label col-sm-2" for="movilGigas">Gigas:</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="movil_gigas" name="movil_gigas"
+                <input type="number" class="form-control" id="movilGigas" name="movilGigas"
                        placeholder="Ingrese la cantidad de gigas del dispositivo" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_color">Color:</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="movil_color" name="movil_color" required>
+            <label class="control-label col-sm-2" for="movilColor">Color:</label>
+            <div class="input-group mb-3 col-sm-10">
+                <select class="form-control" id="movilColor" name="movilColor" required>
                     <option value="" selected>Seleccione un color</option>
-                    <option th:each="color : ${colores}" th:value="${color.getColor_id()}"
-                            th:text="${color.getColor_nombre()}"></option>
+                    <option th:each="color : ${colores}" th:value="${color.getColorId()}"
+                            th:text="${color.getColorNombre()}">
+                    </option>
                 </select>
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addColorModal">
+                        +
+                    </button>
+                </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_calidad">Calidad:</label>
+            <label class="control-label col-sm-2" for="movilCalidad">Calidad:</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="movil_calidad" name="movil_calidad"
+                <input type="number" class="form-control" id="movilCalidad" name="movilCalidad"
                        placeholder="Ingrese la calidad del dispositivo" autocomplete="off" required max="10" min="1">
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_precio_publico">Precio publico:</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" id="movil_precio_publico" name="movil_precio_publico"
+            <label class="control-label col-sm-2" for="movilPrecioPublico">Precio público:</label>
+            <div class="input-group col-sm-10">
+                <div class="input-group-append">
+                    <span class="input-group-text">COP $</span>
+                    <span class="input-group-text" id="movilPrecioPublicoSpan">0.00</span>
+                </div>
+                <input type="number" class="form-control" id="movilPrecioPublico" name="movilPrecioPublico"
                        placeholder="Ingrese el precio publico del dispositivo" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="movil_observaciones">Observación:</label>
+            <label class="control-label col-sm-2" for="movilObservaciones">Observación:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" id="movil_observaciones" name="movil_observaciones"
+                <textarea class="form-control" id="movilObservaciones" name="movilObservaciones"
                           placeholder="Ingrese las observaciones del dispositivo" required
                           autocomplete="off"></textarea>
             </div>
@@ -139,19 +149,24 @@
         <br>
         <hr>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="contexto_ubicacion">Ubicación:</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="contexto_ubicacion" name="contexto_ubicacion" required>
+            <label class="control-label col-sm-2" for="contextoUbicacion">Ubicación:</label>
+            <div class="input-group mb-3 col-sm-10">
+                <select class="form-control" id="contextoUbicacion" name="contextoUbicacion" required>
                     <option value="" selected>Seleccione una ubicación</option>
-                    <option th:each="ubicacion : ${ubicaciones}" th:value="${ubicacion.getUbicacion_id()}"
-                            th:text="${ubicacion.getUbicacion_nombre()}"></option>
+                    <option th:each="ubicacion : ${ubicaciones}" th:value="${ubicacion.getUbicacionId()}"
+                            th:text="${ubicacion.getUbicacionNombre()}"></option>
                 </select>
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addLocationModal">
+                        +
+                    </button>
+                </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="contexto_detalle">Destalle ubicación:</label>
+            <label class="control-label col-sm-2" for="contextoDetalle">Destalle ubicación:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" id="contexto_detalle" name="contexto_detalle"
+                <textarea class="form-control" id="contextoDetalle" name="contextoDetalle"
                           placeholder="Ingrese el motivo de porque esta en esa ubicación" required
                           autocomplete="off"></textarea>
             </div>
@@ -172,7 +187,54 @@
 
 </div>
 <!-- /.container -->
-
+<!-- Modal -->
+<div class="modal fade" id="addLocationModal" tabindex="-1" role="dialog" aria-labelledby="addLocationModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addLocationModalLabel">Agregar ubicación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addLocationForm">
+                    <div class="form-group">
+                        <label for="newLocationName">Nombre de la ubicación</label>
+                        <input type="text" class="form-control" id="newLocationName"
+                               placeholder="Ingrese el nombre de la ubicación" name="ubicacionNombre">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addColorModal" tabindex="-1" role="dialog" aria-labelledby="addColorModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addColorModalLabel">Agregar color</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addColorForm">
+                    <div class="form-group">
+                        <label for="newColorName">Nombre del color</label>
+                        <input type="text" class="form-control" id="newColorName"
+                               placeholder="Ingrese el nombre del color" name="colorNombre">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Footer -->
 <div th:insert="~{component/footer::footer}"></div>
 
@@ -180,6 +242,136 @@
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function updateColores() {
+    $.ajax({
+        url: '/color/colores',
+        type: 'GET',
+        success: function (data) {
+            const colorDropdown = document.getElementById('movilColor');
+            // Limpia el dropdown antes de agregar nuevas opciones
+            while (colorDropdown.firstChild) {
+                colorDropdown.removeChild(colorDropdown.firstChild);
+            }
+            const option1 = document.createElement('option');
+            option1.value = "";
+            option1.text = "Seleccione un color";
+            option1.selected = true;
+            colorDropdown.add(option1);
+            data.forEach(function (color) {
+                const option = document.createElement('option');
+                option.value = color.colorId;
+                option.text = color.colorNombre;
+                colorDropdown.add(option);
+            });
+        },
+        error: function (error) {
+            console.log('Error: ', error);
+        }
+    });
+}
+
+$('#addColorForm').on('submit', function (e) {
+    e.preventDefault();
+
+    const newColorName = $('#newColorName').val();
+
+    $.ajax({
+        url: '/color/save',
+        type: 'POST',
+        data: {
+            colorNombre: newColorName
+        },
+        success: function () {
+            // Cierra la modal
+            $('#addColorModal').modal('hide');
+
+            // Actualiza la lista de colores en el formulario principal
+            updateColores();
+
+            // Muestra una alerta de éxito
+            Swal.fire({
+                title: 'Guardado',
+                text: 'El nuevo color se ha guardado con éxito.',
+                icon: 'success'
+            });
+        },
+        error: function (error) {
+            console.log('Error: ', error);
+        }
+    });
+});
+</script>
+<script>
+    function updateUbicaciones() {
+    $.ajax({
+        url: '/ubicacion/ubicaciones',
+        type: 'GET',
+        success: function (data) {
+            const ubicacionDropdown = document.getElementById('contextoUbicacion');
+            // Limpia el dropdown antes de agregar nuevas opciones
+            while (ubicacionDropdown.firstChild) {
+                ubicacionDropdown.removeChild(ubicacionDropdown.firstChild);
+            }
+            const option1 = document.createElement('option');
+            option1.value = "";
+            option1.text = "Seleccione una ubicación";
+            option1.selected = true;
+            ubicacionDropdown.add(option1);
+            data.forEach(function (ubicacion) {
+                const option = document.createElement('option');
+                option.value = ubicacion.ubicacionId;
+                option.text = ubicacion.ubicacionNombre;
+                ubicacionDropdown.add(option);
+            });
+        },
+        error: function (error) {
+            console.log('Error: ', error);
+        }
+    });
+}
+
+    $('#addLocationForm').on('submit', function (e) {
+    e.preventDefault();
+
+        const newLocationName = $('#newLocationName').val();
+
+        $.ajax({
+        url: '/ubicacion/save',
+        type: 'POST',
+        data: {
+            ubicacionNombre: newLocationName
+        },
+        success: function () {
+            // Cierra la modal
+            $('#addLocationModal').modal('hide');
+
+            // Actualiza la lista de ubicaciones en el formulario principal
+            updateUbicaciones();
+
+            // Muestra una alerta de éxito
+            Swal.fire({
+                title: 'Guardado',
+                text: 'La nueva ubicación se ha guardado con éxito.',
+                icon: 'success'
+            });
+        },
+        error: function (error) {
+            console.log('Error: ', error);
+        }
+    });
+});
+</script>
+<script>
+    document.getElementById('movilPrecioPublico').addEventListener('input', function (e) {
+        const valor = parseFloat(e.target.value);
+        if (!isNaN(valor)) {
+            document.getElementById('movilPrecioPublicoSpan').textContent = valor.toLocaleString('es-CO');
+        } else {
+            document.getElementById('movilPrecioPublicoSpan').textContent = '0.00';
+        }
+    });
+</script>
 <script>
     document.getElementById('saveButton').addEventListener('click', function (e) {
         e.preventDefault();
@@ -206,8 +398,8 @@
 </script>
 <script>
     function updateFamilias() {
-        const marcaId = document.getElementById('marca_id').value;
-        const familiaDropdown = document.getElementById('familia_id');
+        const marcaId = document.getElementById('marcaId').value;
+        const familiaDropdown = document.getElementById('familiaId');
         // Si marcaId es vacío, limpia las opciones y retorna
         if (marcaId === "") {
             while (familiaDropdown.firstChild) {
@@ -235,8 +427,8 @@
                 familiaDropdown.add(option1);
                 data.forEach(function (familia) {
                     const option = document.createElement('option');
-                    option.value = familia.familia_id;
-                    option.text = familia.familia_nombre;
+                    option.value = familia.familiaId;
+                    option.text = familia.familiaNombre;
                     familiaDropdown.add(option);
                 });
             },
@@ -247,8 +439,8 @@
     }
 
     function updateModelos() {
-        const familiaId = document.getElementById('familia_id').value;
-        const modeloDropdown = document.getElementById('modelo_id');
+        const familiaId = document.getElementById('familiaId').value;
+        const modeloDropdown = document.getElementById('modeloId');
         // Si familiaId es vacío, limpia las opciones y retorna
         if (familiaId === "") {
             while (modeloDropdown.firstChild) {
@@ -276,8 +468,8 @@
                 modeloDropdown.add(option1);
                 data.forEach(function (modelo) {
                     const option = document.createElement('option');
-                    option.value = modelo.modelo_id;
-                    option.text = modelo.modelo_nombre;
+                    option.value = modelo.modeloId;
+                    option.text = modelo.modeloNombre;
                     modeloDropdown.add(option);
                 });
             },
