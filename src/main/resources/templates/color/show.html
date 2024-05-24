@@ -41,7 +41,7 @@
     <br>
     <a class="btn btn-primary" th:href="@{/color/create}">Agregar color</a>
     <h2>Colores registradas</h2>
-    <table class="table cell-border">
+    <table class="table cell-border" id="tablaColor">
         <thead class="table-dark text-center">
         <tr>
             <th scope="col">Color</th>
@@ -78,13 +78,25 @@
 <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('.table').DataTable({
+        $('#tablaColor').DataTable({
             "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "emptyTable":     "No hay datos disponibles en la tabla",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             },
             "columnDefs": [
-                /*{"orderable": false, "targets": 12},
-                {"searchable": false, "targets": 12}*/
+                {"orderable": false, "targets": 2},
+                {"searchable": false, "targets": 2}
             ]
         });
     });

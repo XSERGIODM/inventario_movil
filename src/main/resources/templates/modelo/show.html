@@ -17,7 +17,6 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
-
 </head>
 
 <body>
@@ -55,7 +54,7 @@
     <h2>Modelo registrados</h2>
     <br>
     <a class="btn btn-primary" th:href="@{/modelo/create}">Agregar modelo</a>
-    <table class="table cell-border">
+    <table class="table cell-border" id="tablaModelo">
         <thead class="table-dark text-center">
         <tr>
             <th scope="col">Marca</th>
@@ -95,9 +94,21 @@
 <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('.table').DataTable({
+        $('#tablaModelo').DataTable({
             "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "emptyTable":     "No hay datos disponibles en la tabla",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             },
             "columnDefs": [
                 {"orderable": false, "targets": 4},
