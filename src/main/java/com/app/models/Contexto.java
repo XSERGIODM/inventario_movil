@@ -33,4 +33,8 @@ public class Contexto {
     @JoinColumn(name = "contexto_ubicacion_id")
     Ubicacion contextoUbicacion;
 
+    public Integer diasTranscurridos() {
+        return (LocalDateTime.now().getDayOfYear() - contextoFechaEntrada.getDayOfYear());
+    }
+
 }
