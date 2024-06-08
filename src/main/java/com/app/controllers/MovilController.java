@@ -34,7 +34,6 @@ public class MovilController {
 
     @GetMapping("/")
     public String home() {
-
         return "redirect:/movil/show";
     }
 
@@ -47,13 +46,18 @@ public class MovilController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("marcas", marcaService.findAll());
+        List<Marca> marcas = marcaService.findAll();
+        marcas.removeIf(marca -> !marca.getMarcaEstado());
+        model.addAttribute("marcas", marcas);
+
         List<Color> colores = colorService.findAll();
         colores.removeIf(color -> !color.getColorEstado());
         model.addAttribute("colores", colores);
+
         List<Ubicacion> ubicaciones = ubicacionService.findAll();
         ubicaciones.removeIf(ubicacion -> !ubicacion.getUbicacionEstado());
         model.addAttribute("ubicaciones", ubicaciones);
+
         return "movil/create";
     }
 
@@ -106,13 +110,17 @@ public class MovilController {
     @GetMapping("/getFamiliasByMarca/{marcaId}")
     public ResponseEntity<List<Familia>> getFamiliasByMarca(@PathVariable Long marcaId) {
         Marca marca = marcaService.findById(marcaId);
-        return ResponseEntity.ok(marca.getFamilias());
+        List<Familia> familias = marca.getFamilias();
+        familias.removeIf(familia -> !familia.getFamiliaEstado());
+        return ResponseEntity.ok(familias);
     }
 
     @GetMapping("/getModelosByFamilia/{familiaId}")
     public ResponseEntity<List<Moodelo>> getModelosByFamilia(@PathVariable Long familiaId) {
         Familia familia = familiaService.findById(familiaId);
-        return ResponseEntity.ok(familia.getModelos());
+        List<Moodelo> modelos = familia.getModelos();
+        modelos.removeIf(modelo -> !modelo.getModeloEstado());
+        return ResponseEntity.ok(modelos);
     }
 
     @GetMapping("/info/{id}")
