@@ -42,8 +42,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6">
-                    <img class="img-thumbnail rounded"
-                         th:src="@{/images/{img} (img = ${movil.getMovilImagen()})}" alt="">
+                    <img class="img-thumbnail rounded mx-auto d-block"
+                         th:src="@{/images/{img} (img = ${movil.getMovilImagen()})}"
+                         th:alt="'imagen de' + ${movil.getMovilModelo().getModeloFamilia().getFamiliaMarca().getMarcaNombre()}+' '+${movil.getMovilModelo().getModeloFamilia().getFamiliaNombre()} + ' ' + ${movil.getMovilModelo().getModeloNombre()}"
+                         style="width: auto; height: auto;">
                 </div>
                 <div class="col-lg-6">
                     <input type="hidden" th:value="${movil.getMovilId()}" name="id">
