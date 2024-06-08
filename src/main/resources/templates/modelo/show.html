@@ -13,26 +13,18 @@
 
     <!-- Bootstrap core CSS -->
     <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
 </head>
 
 <body>
-
 <!-- Navigation -->
 <div th:insert="~{component/natBar::header}"></div>
 
 <!-- Page Content -->
 <div class="col-lg-auto">
-
-
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">
-        Sistema <small>Movil</small>
-    </h1>
-
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" th:href="@{/}">Home</a>
@@ -50,35 +42,38 @@
             <a class="nav-link" th:href="@{/marca/show}">Marcas</a>
         </li>
     </ul>
-    <br>
-    <h2>Modelo registrados</h2>
-    <br>
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Panel de Administración de Modelos</h1>
+        <p class="lead">Aquí puedes administrar los modelos  de tu tienda</p>
+    </header>
     <a class="btn btn-primary" th:href="@{/modelo/create}">Agregar modelo</a>
-    <table class="table cell-border" id="tablaModelo">
-        <thead class="table-dark text-center">
-        <tr>
-            <th scope="col">Marca</th>
-            <th scope="col">Familia</th>
-            <th scope="col">Modelo</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
-        </tr>
-        </thead>
-        <tbody class="table-hover">
-        <tr th:classappend="${modelo.getModeloEstado() ? 'table-light' : 'table-danger'}" th:each="modelo:${modelos}">
-            <td th:text="${modelo.getModeloFamilia().getFamiliaMarca().getMarcaNombre()}"></td>
-            <td th:text="${modelo.getModeloFamilia().getFamiliaNombre()}"></td>
-            <td th:text="${modelo.getModeloNombre()}"></td>
-            <td th:text="${modelo.getModeloEstado()?'Activa':'Inactiva'}"></td>
-            <td class="text-center">
-                <a class="btn btn-info" th:href="@{/modelo/edit/{id} (id=${modelo.getModeloId()})}">Editar</a>
-                <a class="btn" th:classappend="${modelo.getModeloEstado() ? 'btn-danger' : 'btn-success'}"
-                   th:href="@{/modelo/deshabilitarHabilitar/{id} (id=${modelo.getModeloId()})}"
-                   th:text="${modelo.getModeloEstado()?'Deshabilitar':'Habilitar'}"></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table cell-border" id="tablaModelo">
+            <thead class="table-dark text-center">
+            <tr>
+                <th scope="col">Marca</th>
+                <th scope="col">Familia</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+            </tr>
+            </thead>
+            <tbody class="table-hover dataTable" >
+            <tr th:classappend="${modelo.getModeloEstado() ? 'table-light' : 'table-danger'}" th:each="modelo:${modelos}">
+                <td th:text="${modelo.getModeloFamilia().getFamiliaMarca().getMarcaNombre()}"></td>
+                <td th:text="${modelo.getModeloFamilia().getFamiliaNombre()}"></td>
+                <td th:text="${modelo.getModeloNombre()}"></td>
+                <td th:text="${modelo.getModeloEstado()?'Activa':'Inactiva'}"></td>
+                <td class="text-center">
+                    <a class="btn btn-info" th:href="@{/modelo/edit/{id} (id=${modelo.getModeloId()})}">Editar</a>
+                    <a class="btn" th:classappend="${modelo.getModeloEstado() ? 'btn-danger' : 'btn-success'}"
+                       th:href="@{/modelo/deshabilitarHabilitar/{id} (id=${modelo.getModeloId()})}"
+                       th:text="${modelo.getModeloEstado()?'Deshabilitar':'Habilitar'}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 <!-- /.container -->

@@ -29,9 +29,6 @@
 
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">
-        Sistema <small>Movil</small>
-    </h1>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" th:href="@{/}">Home</a>
@@ -49,9 +46,10 @@
             <a class="nav-link active" th:href="@{/marca/show}">Marcas</a>
         </li>
     </ul>
-    <br>
-    <h2>Marcas registradas</h2>
-    <br>
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Panel de Administración de Marcas</h1>
+        <p class="lead">Aquí puedes administrar las marcas de tu tienda</p>
+    </header>
     <a class="btn btn-primary" th:href="@{/marca/create}">Agregar marca</a>
     <table class="table cell-border" id="tablaMarca">
         <thead class="table-dark text-center">

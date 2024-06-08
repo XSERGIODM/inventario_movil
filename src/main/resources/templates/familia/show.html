@@ -26,13 +26,6 @@
 
 <!-- Page Content -->
 <div class="col-lg-auto">
-
-
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">
-        Sistema <small>Movil</small>
-    </h1>
-
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" th:href="@{/}">Home</a>
@@ -50,9 +43,10 @@
             <a class="nav-link" th:href="@{/marca/show}">Marcas</a>
         </li>
     </ul>
-    <br>
-    <h2>Familias registradas</h2>
-    <br>
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Panel de Administración de Familias</h1>
+        <p class="lead">Aquí puedes administrar las familias de tu tienda</p>
+    </header>
     <a class="btn btn-primary" th:href="@{/familia/create}">Agregar familia</a>
     <table class="table cell-border" id="tablaFamilia">
         <thead class="table-dark text-center">

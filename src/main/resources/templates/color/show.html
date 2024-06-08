@@ -26,21 +26,22 @@
 <div th:insert="~{component/natBar::header}"></div>
 
 <!-- Page Content -->
-<div class="col-lg-auto">
-
-
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">
-        Sistema <small>Movil</small>
-    </h1>
-
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item active">Ver colores</li>
-    </ol>
-    <br>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active">Colores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/ubicacion/show}">Ubicaciones</a>
+        </li>
+    </ul>
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Panel de Administración de Colores de los Dispositivos</h1>
+        <p class="lead">Aquí puedes administrar los colores de los dispositivos de tu tienda</p>
+    </header>
     <a class="btn btn-primary" th:href="@{/color/create}">Agregar color</a>
-    <h2>Colores registradas</h2>
     <table class="table cell-border" id="tablaColor">
         <thead class="table-dark text-center">
         <tr>

@@ -28,20 +28,21 @@
 
 <!-- Page Content -->
 <div class="col-lg-auto">
-
-
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">
-        Sistema <small>Movil</small>
-    </h1>
-
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item active">Ver ubicaciones</li>
-    </ol>
-    <br>
-    <h2>Ubicaciones registradas</h2>
-    <br>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  th:href="@{/color/show}">Colores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active">Ubicaciones</a>
+        </li>
+    </ul>
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Panel de Administración de Ubicaciones de los Dispositivos</h1>
+        <p class="lead">Aquí puedes administrar las ubicaciones de tus dispositivos de tu  tienda</p>
+    </header>
     <a class="btn btn-primary" th:href="@{/ubicacion/create}">Agregar ubicación</a>
     <table class="table cell-border" id="tablaUbi">
         <thead class="table-dark text-center">

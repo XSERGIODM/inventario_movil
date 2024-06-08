@@ -1,134 +1,148 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+      <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="description" content="">
+            <meta name="author" content="">
 
-    <title>Sistema Movil</title>
+            <title>Sistema Vitix</title>
 
 
-    <!-- Bootstrap core CSS -->
-    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+            <!-- Bootstrap core CSS -->
+            <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
-</head>
+            <!-- Custom styles for this template -->
+            <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+            <link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
 
-<body>
+      </head>
 
-<!-- Navigation -->
-<div th:insert="~{component/natBar::header}"></div>
+      <body>
 
-<!-- Page Content -->
-<div class="col-lg-auto">
+            <div th:insert="~{component/natBar::header}"></div>
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">
-        Sistema <small>Movil</small>
-    </h1>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/}">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" th:href="@{/movil/show}">Moviles</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/modelo/show}">Modelos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link " th:href="@{/familia/show}">Familias</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/marca/show}">Marcas</a>
-        </li>
-    </ul>
-    <br>
-    <h2>Productos</h2>
-    <br>
-    <a class="btn btn-primary" th:href="@{/movil/create}">Agregar celular</a>
-    <table class="table cell-border" id="tablaMovil">
-        <thead class="table-dark text-center">
-        <tr>
-            <th scope="col">Marca</th>
-            <th scope="col">Familia</th>
-            <th scope="col">Modelo</th>
-            <th scope="col">IMEI 1</th>
-            <th scope="col">Color</th>
-            <th scope="col">Gigas</th>
-            <th scope="col">%Bateria</th>
-            <th scope="col">Precio publico</th>
-            <th scope="col">Calidad</th>
-            <th scope="col">Observaciones</th>
-            <th scope="col">Ubicación actual</th>
-            <th scope="col">Disponible</th>
-            <th scope="col">Acción</th>
-        </tr>
-        </thead>
-        <tbody class="table-hover">
-        <tr th:classappend="${movil.getMovilEstado() ? 'table-light' : 'table-danger'}" th:each="movil:${moviles}">
-            <td th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaMarca().getMarcaNombre()}"></td>
-            <td th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaNombre()}"></td>
-            <td th:text="${movil.getMovilModelo().getModeloNombre()}"></td>
-            <td th:text="${movil.getMovilImei1()}"></td>
-            <td th:text="${movil.getMovilColor().getColorNombre()}"></td>
-            <td th:text="${movil.getMovilGigas()}"></td>
-            <td th:text="${movil.getMovilBateria()}"></td>
-            <td th:text="'$'+${#numbers.formatDecimal(movil.getMovilPrecioPublico(), 1, 'POINT', 0, 'COMMA')}"></td>
-            <td th:text="${movil.getMovilCalidad()}+'/10'"></td>
-            <td th:text="${movil.getMovilObservaciones()}"></td>
-            <td th:each="contexto : ${movil.getContextos()}" th:if="${contexto.getContextoEstado()}"
-                th:text="${contexto.getContextoUbicacion().getUbicacionNombre()}"></td>
-            <td th:text="${movil.getMovilEstado()?'Si':'No'}"></td>
-            <td>
-                <a class="btn btn-info" th:href="@{/movil/info/{id} (id=${movil.getMovilId()})}">Info</a>
-                <a class="btn btn-light" th:href="@{/movil/edit/{id} (id=${movil.getMovilId()})}">Editar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<!-- /.container -->
+            <!-- Page Content -->
+            <div class="col-lg-auto">
+                  <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                              <a class="nav-link" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link active" th:href="@{/movil/show}">Moviles</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" th:href="@{/modelo/show}">Modelos</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link " th:href="@{/familia/show}">Familias</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" th:href="@{/marca/show}">Marcas</a>
+                        </li>
+                  </ul>
+                  <!-- Jumbotron Header -->
+                  <header class="jumbotron my-4">
+                        <h1 class="display-3 text-uppercase">Panel de Administración de Dispositivos</h1>
+                        <p class="lead">Aquí puedes administrar los dispositivos de tu tienda</p>
+                  </header>
+                  <table class="table cell-border table-sm" id="tablaMovil">
+                        <caption>
+                              <a class="btn btn-primary" th:href="@{/movil/create}">Agregar celular</a>
+                        </caption>
+                        <thead class="table-dark text-center">
+                              <tr>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Familia</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">IMEI 1</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Gigas</th>
+                                    <th scope="col">%Bateria</th>
+                                    <th scope="col">Precio publico</th>
+                                    <th scope="col">Calidad</th>
+                                    <th scope="col">Observaciones</th>
+                                    <th scope="col">Dias en stock</th>
+                                    <th scope="col">Ubicación actual</th>
+                                    <th scope="col">Disponible</th>
+                                    <th scope="col">Acción</th>
+                              </tr>
+                        </thead>
+                        <tbody class="table-hover">
+                              <tr th:classappend="${movil.getMovilEstado() ? 'table-light' : 'table-danger'}"
+                                  th:each="movil:${moviles}">
+                                    <td th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaMarca().getMarcaNombre()}"></td>
+                                    <td th:text="${movil.getMovilModelo().getModeloFamilia().getFamiliaNombre()}"></td>
+                                    <td th:text="${movil.getMovilModelo().getModeloNombre()}"></td>
+                                    <td th:text="${movil.getMovilImei1()}"></td>
+                                    <td th:text="${movil.getMovilColor().getColorNombre()}"></td>
+                                    <td th:text="${movil.getMovilGigas()}"></td>
+                                    <td th:text="${movil.getMovilBateria()}"></td>
+                                    <td th:text="'$'+${#numbers.formatDecimal(movil.getMovilPrecioPublico(), 1, 'POINT', 0, 'COMMA')}"></td>
+                                    <td th:text="${movil.getMovilCalidad()}+'/10'"></td>
+                                    <td th:text="${movil.getMovilObservaciones()}"></td>
+                                    <td th:text="${movil.getContextos().get(0).diasTranscurridos()}"></td>
+                                    <td th:each="contexto : ${movil.getContextos()}"
+                                        th:if="${contexto.getContextoEstado()}"
+                                        th:text="${contexto.getContextoUbicacion().getUbicacionNombre()}"></td>
+                                    <td th:text="${movil.getMovilEstado()?'Si':'No'}"></td>
+                                    <td>
+                                          <a class="btn btn-info"
+                                             th:href="@{/movil/info/{id} (id=${movil.getMovilId()})}">Info</a>
+                                          <a class="btn btn-light"
+                                             th:href="@{/movil/edit/{id} (id=${movil.getMovilId()})}">Editar</a>
+                                    </td>
+                              </tr>
+                        </tbody>
+                        <tfoot>
+                              <tr>
+                                    <td colspan="13" class="text-center">Total de registros: <span
+                                            th:text="${moviles.size()}"></span></td>
+                              </tr>
 
-<!-- Footer -->
-<div th:insert="~{component/footer::footer}"></div>
-
-<!-- Bootstrap core JavaScript -->
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-<script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#tablaMovil').DataTable({
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "emptyTable":     "No hay datos disponibles en la tabla",
-                "search": "Buscar:",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            "columnDefs": [
-                {"orderable": false, "targets": 12},
-                {"searchable": false, "targets": 12}
-            ]
-        });
-    });
-</script>
-</body>
+                        </tfoot>
+                  </table>
+            </div>
+            <!-- /.container -->
+            <!-- Footer -->
+            <div th:insert="~{component/footer::footer}"></div>
+            <!-- Bootstrap core JavaScript -->
+            <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+            <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+            <script src="https://code.jquery.com/jquery-3.7.1.js"
+                    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+                    crossorigin="anonymous"></script>
+            <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#tablaMovil').DataTable({
+                        "language": {
+                            "lengthMenu": "Mostrar _MENU_ registros por página",
+                            "zeroRecords": "No se encontraron resultados",
+                            "info": "Mostrando página _PAGE_ de _PAGES_",
+                            "infoEmpty": "No hay registros disponibles",
+                            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                            "emptyTable": "No hay datos disponibles en la tabla",
+                            "search": "Buscar:",
+                            "paginate": {
+                                "first": "Primero",
+                                "last": "Último",
+                                "next": "Siguiente",
+                                "previous": "Anterior"
+                            }
+                        },
+                        "columnDefs": [
+                            {"orderable": false, "targets": 13},
+                            {"searchable": false, "targets": 13}
+                        ],
+                        "order": [
+                            [ 10, "asc" ]
+                        ]
+                    });
+                });
+            </script>
+      </body>
 
 </html>
